@@ -26,6 +26,7 @@ var Level1 = (function (_super) {
         this.setupAudio();
         this.setupMap();
         this.setupKeyboard();
+        this.setupStatusBar();
         this.setupPlayer();
         this.setupBoss();
         this.setupEnemies();
@@ -94,7 +95,7 @@ var Level1 = (function (_super) {
         this.volume = .2;
         this.levelMusic = this.game.add.audio('music');
         this.levelMusic.volume = this.volume;
-        this.levelMusic.play();
+        this.levelMusic.play(null, null, 1, true);
         this.playerDeathSound = this.game.add.audio('playerDeath');
         this.playerDeathSound.onStop.add(this.soundStopped.bind(this));
         this.bulletSound = this.game.add.audio('bulletSound');
@@ -104,6 +105,7 @@ var Level1 = (function (_super) {
     Level1.prototype.setupPlayer = function () {
         this.player = new Player(this, this.cursors, this.layer, this.bulletSound);
         this.player.setup();
+        this.updatePowerBar();
     };
     Level1.prototype.setupBoss = function () {
         this.boss = new Boss(this.game, this.layer, this.bulletSound, this.player);
@@ -132,10 +134,42 @@ var Level1 = (function (_super) {
     Level1.prototype.setupKeyboard = function () {
         this.cursors = this.game.input.keyboard.createCursorKeys();
     };
+    Level1.prototype.setupStatusBar = function () {
+        this.powerBar = this.game.add.graphics(0, 0);
+        this.statusBar = this.addText(0, 46.5, 'POWER');
+    };
+    Level1.prototype.updatePowerBar = function () {
+        this.game.debug.text(this.player.power.toString(), 200, 200);
+        this.powerBar.beginFill(0x000000);
+        this.powerBar.lineStyle(2, 0x000000, 1);
+        this.powerBar.drawRect(0, 740, 512, 32);
+        this.powerBar.endFill();
+        this.powerBar.lineStyle(2, 0xffffff, 2);
+        this.powerBar.drawRect(90, 740, 421, 24);
+        var color;
+        if (this.player.power > 75) {
+            color = 0x00ff00;
+        }
+        else if (this.player.power > 30) {
+            color = 0x0000ff;
+        }
+        else {
+            color = 0xff0000;
+        }
+        this.powerBar.beginFill(color);
+        this.powerBar.lineStyle(2, 0xffffff, 0);
+        this.powerBar.drawRect(92, 742, (this.player.power / 100) * 417, 20);
+        this.powerBar.endFill();
+    };
+    Level1.prototype.addText = function (x, y, text) {
+        return this.game.add.bitmapText(2 * (x * 8) + 2, 2 * (y * 8) + 2, 'konami', text, 13.8);
+    };
     Level1.prototype.firePlayerBullet = function () {
         var playerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
         playerBullet.setup();
         this.playerBullets.push(playerBullet);
+        this.player.power -= 10;
+        this.updatePowerBar();
     };
     Level1.prototype.playerBulletHit = function (playerBullet, target) {
         var _this = this;
@@ -161,8 +195,8 @@ var Level1 = (function (_super) {
     Level1.prototype.playerWasHit = function (enemy) {
         var _this = this;
         if (this.player.sprite.animations.currentAnim.name == 'run') {
-            this.levelMusic.stop();
-            this.playerDeathSound.play();
+            //this.levelMusic.stop();
+            //this.playerDeathSound.play();
             this.player.wasHit();
         }
         this.enemies.forEach(function (e, i) {
@@ -179,10 +213,18 @@ var Level1 = (function (_super) {
     };
     Level1.prototype.scroll = function () {
         this.game.camera.y -= this.getScrollStep();
-        if (this.player.state instanceof PlayerStateRunning) {
-            this.player.walk();
+        if (this.game.camera.y > 0) {
+            this.statusBar.position.y -= this.getScrollStep();
+            this.powerBar.position.y -= this.getScrollStep();
+            if (this.player.state instanceof PlayerStateRunning) {
+                this.player.walk();
+            }
         }
         this.game.time.events.add(Phaser.Timer.SECOND / 32, this.scroll.bind(this));
+        //while (this.player.power > 0) {
+        //    this.player.power-=.1;
+        //    this.updatePowerBar();
+        //}
     };
     return Level1;
 }(Phaser.State));

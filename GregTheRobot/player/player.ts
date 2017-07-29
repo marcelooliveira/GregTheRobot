@@ -27,7 +27,7 @@ class Player implements IPlayer {
     velocity: number;
     walkingVelocity: number;
     state: IPlayerState;
-
+    power: number;
     constructor(
         level: Level1, cursors: Phaser.CursorKeys,
         layer: Phaser.TilemapLayer, bulletSound: Phaser.Sound) {
@@ -36,6 +36,7 @@ class Player implements IPlayer {
         this.cursors = cursors;
         this.layer = layer;
         this.bulletSound = bulletSound;
+        this.power = 100;
         this.create();
     }
 
@@ -77,6 +78,7 @@ class Player implements IPlayer {
         this.sprite = this.game.add.sprite(this.game.world.centerX - 16, 256, 'player');
 
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
+        this.sprite.animations.add('hit', [4, 5, 6, 7, 4, 5, 6, 7], 10, true);
         this.sprite.animations.add('die', [4, 5, 6, 7, 4, 5, 6, 7], 10, true);
         this.sprite.animations.play('run');
         this.velocity = 150;
@@ -92,8 +94,10 @@ class Player implements IPlayer {
     }
     
     wasHit() {
-        this.sprite.animations.play('die');
-        this.state = new PlayerStateDying(this);
+        this.sprite.animations.play('hit');
+        //this.state = new PlayerStateDying(this);
+        this.power -= 10;
+        this.level.updatePowerBar();
     }
 
     resurrect() {

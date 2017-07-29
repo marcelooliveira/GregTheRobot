@@ -29,7 +29,6 @@
         }.bind(this));
 
         this.game.physics.arcade.collide(this.sprite, this.player.sprite, function () {
-            //alert('game over');
             this.player.wasHit(this);
         }.bind(this));
 

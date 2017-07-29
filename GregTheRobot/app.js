@@ -7,16 +7,17 @@
 /// <reference path="player/player.ts" />
 /// <reference path="player/playerbullet.ts" />
 /// <reference path="player/playerstate.ts" />
-var KnightmareGame = (function () {
-    function KnightmareGame() {
+var GregTheRobot = (function () {
+    function GregTheRobot() {
         this.game = new Phaser.Game(512, 512, Phaser.AUTO, 'content', {
             create: this.create, preload: this.preload,
             update: this.update
         });
     }
-    KnightmareGame.prototype.preload = function () {
+    GregTheRobot.prototype.preload = function () {
         this.game.load.spritesheet('menu', 'assets/backgrounds/menu.png', 512, 384);
         this.game.load.spritesheet('splash01', 'assets/backgrounds/splash01.png', 512, 384);
+        this.game.load.script('baseState', 'gamestates/baseState.js');
         this.game.load.script('menu', 'gamestates/menu.js');
         this.game.load.script('splash01', 'gamestates/splash.js');
         this.game.load.script('level1', 'gamestates/level.js');
@@ -42,24 +43,24 @@ var KnightmareGame = (function () {
         this.game.load.spritesheet('playerBullet', 'assets/sprites/PlayerBullet1SpriteSheet.png', 32, 32);
         this.game.load.audio('start', ['assets/audio/Start.mp3']);
         this.game.load.audio('intro', ['assets/audio/Intro.mp3']);
-        this.game.load.audio('music', ['assets/audio/Level1.mp3']);
+        this.game.load.audio('music', ['assets/audio/run-out-of-the-city.wav']);
         this.game.load.audio('playerDeath', ['assets/audio/Death.mp3']);
         this.game.load.audio('bulletSound', ['assets/audio/PlayerBullet1Shooting.wav']);
         this.game.load.bitmapFont('konami', 'assets/fonts/konami_0.png', 'assets/fonts/konami.xml');
     };
-    KnightmareGame.prototype.create = function () {
+    GregTheRobot.prototype.create = function () {
         this.game.state.add('menu', Menu);
         this.game.state.add('splash01', Splash01);
         this.game.state.add('level1', Level1);
         this.game.state.start('level1');
     };
-    KnightmareGame.prototype.update = function () {
+    GregTheRobot.prototype.update = function () {
     };
-    KnightmareGame.prototype.render = function () {
+    GregTheRobot.prototype.render = function () {
     };
-    return KnightmareGame;
+    return GregTheRobot;
 }());
 window.onload = function () {
-    var game = new KnightmareGame();
+    var game = new GregTheRobot();
 };
 //# sourceMappingURL=app.js.map

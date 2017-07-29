@@ -59,6 +59,14 @@
     <Content Include="assets\audio\Bonus.mp3" />
     <Content Include="assets\audio\BossTheme.mp3" />
     <Content Include="assets\audio\BulletShooting.wav" />
+    <Content Include="assets\audio\fight-boss-1.wav" />
+    <Content Include="assets\audio\fight-boss-2.wav" />
+    <Content Include="assets\audio\fight-boss-3.wav" />
+    <Content Include="assets\audio\fight-boss-4.wav" />
+    <Content Include="assets\audio\fight-boss-5.wav" />
+    <Content Include="assets\audio\run-out-of-the-city.wav" />
+    <Content Include="assets\audio\see-boss.wav" />
+    <Content Include="assets\audio\see-leprechau.wav" />
     <Content Include="assets\audio\Start.mp3" />
     <Content Include="assets\audio\Death.mp3" />
     <Content Include="assets\audio\FinishLevel.mp3" />
@@ -77,6 +85,7 @@
     <Content Include="assets\audio\PowerUp.wav" />
     <Content Include="assets\audio\TheEnd.mp3" />
     <Content Include="assets\audio\unpause.mp3" />
+    <Content Include="assets\audio\walk-to-find-leprechau.wav" />
     <Content Include="assets\audio\Weapon.wav" />
     <Content Include="assets\backgrounds\menu.png" />
     <Content Include="assets\backgrounds\splash01.png" />
@@ -121,6 +130,7 @@
     <Content Include="assets\sprites\PlayerBulletSpriteSheet.png" />
     <Content Include="assets\sprites\PlayerDestructionSpriteSheet.png" />
     <Content Include="index.html" />
+    <TypeScriptCompile Include="gamestates\baseState.ts" />
     <TypeScriptCompile Include="gamestates\splash.ts" />
     <TypeScriptCompile Include="gamestates\menu.ts" />
     <Content Include="phaser\phaser2.png" />

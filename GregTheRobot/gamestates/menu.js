@@ -15,7 +15,7 @@ var Menu = (function (_super) {
     }
     Menu.prototype.create = function () {
         this.game.add.sprite(0, 0, 'menu');
-        this.addText(11, 4, 'KNIGHTMARE');
+        this.addText(11, 4, 'GREG THE ROBOT');
         this.addText(10, 12, '©KONAMI 1986');
         this.pushSpaceKey = this.addText(9, 16, 'PUSH SPACE KEY');
         this.startSound = this.game.add.audio('start');

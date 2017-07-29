@@ -8,8 +8,9 @@
 /// <reference path="player/playerbullet.ts" />
 /// <reference path="player/playerstate.ts" />
 
-class KnightmareGame {
+class GregTheRobot {
     game: Phaser.Game;
+    statusBar: Phaser.BitmapText;
     constructor() {
         this.game = new Phaser.Game(512, 512, Phaser.AUTO, 'content', {
             create: this.create, preload: this.preload,
@@ -21,6 +22,7 @@ class KnightmareGame {
         this.game.load.spritesheet('menu', 'assets/backgrounds/menu.png', 512, 384);
         this.game.load.spritesheet('splash01', 'assets/backgrounds/splash01.png', 512, 384);
 
+        this.game.load.script('baseState', 'gamestates/baseState.js');
         this.game.load.script('menu', 'gamestates/menu.js');
         this.game.load.script('splash01', 'gamestates/splash.js')
         this.game.load.script('level1', 'gamestates/level.js');
@@ -49,7 +51,7 @@ class KnightmareGame {
 
         this.game.load.audio('start', ['assets/audio/Start.mp3']);
         this.game.load.audio('intro', ['assets/audio/Intro.mp3']);
-        this.game.load.audio('music', ['assets/audio/Level1.mp3']);
+        this.game.load.audio('music', ['assets/audio/run-out-of-the-city.wav']);
         this.game.load.audio('playerDeath', ['assets/audio/Death.mp3']);
         this.game.load.audio('bulletSound', ['assets/audio/PlayerBullet1Shooting.wav']);
 
@@ -63,6 +65,7 @@ class KnightmareGame {
         this.game.state.start('level1');
     }
 
+
     update() {
     }
 
@@ -72,6 +75,6 @@ class KnightmareGame {
 
 window.onload = () => {
 
-    var game = new KnightmareGame();
+    var game = new GregTheRobot();
 
 };
