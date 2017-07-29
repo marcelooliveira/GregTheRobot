@@ -1,0 +1,27 @@
+{"frames": [
+{
+	"filename": "run00",
+  "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 32,
+    "h": 32
+  },
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":56,"h":60},
+	"sourceSize": {"w":56,"h":64}
+}],
+  "meta": {
+    "app": "http://www.texturepacker.com",
+    "version": "1.0",
+    "image": "player.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 252,
+      "h": 256
+    },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:fb56f261b1eb04e3215824426595f64c$"
+  }
+}

@@ -1,0 +1,16 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: black;
+}
+
+span {
+    font-style: italic;
+}
+
+#content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -256px;
+    margin-top: -256px;
+}
