@@ -1,8 +1,8 @@
-var PlayerStateRunning = (function () {
-    function PlayerStateRunning(player) {
+class PlayerStateRunning {
+    constructor(player) {
         this.player = player;
     }
-    PlayerStateRunning.prototype.update = function (cursors, keyboard, camera) {
+    update(cursors, keyboard, camera) {
         if (cursors.up.isDown) {
             this.player.runUp();
         }
@@ -26,15 +26,13 @@ var PlayerStateRunning = (function () {
         else if (!keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
             this.player.isWeaponLoaded = true;
         }
-    };
-    return PlayerStateRunning;
-}());
-var PlayerStateDying = (function () {
-    function PlayerStateDying(player) {
+    }
+}
+class PlayerStateDying {
+    constructor(player) {
         this.player = player;
     }
-    PlayerStateDying.prototype.update = function (cursors, keyboard, camera) {
-    };
-    return PlayerStateDying;
-}());
+    update(cursors, keyboard, camera) {
+    }
+}
 //# sourceMappingURL=playerState.js.map

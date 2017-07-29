@@ -1,15 +1,15 @@
-var Boss = (function () {
-    function Boss(game, layer, bulletSound, player) {
+class Boss {
+    constructor(game, layer, bulletSound, player) {
         this.game = game;
         this.layer = layer;
         this.bulletSound = bulletSound;
         this.player = player;
         this.create();
     }
-    Boss.prototype.create = function () {
+    create() {
         this.isWeaponLoaded = true;
-    };
-    Boss.prototype.update = function () {
+    }
+    update() {
         this.game.physics.arcade.collide(this.sprite, this.layer, function () {
             this.velocity *= -1;
             this.sprite.body.velocity.x = this.velocity;
@@ -29,8 +29,8 @@ var Boss = (function () {
             && this.sprite.animations.currentFrame.index == 0) {
             this.sprite.animations.play('run');
         }
-    };
-    Boss.prototype.setup = function () {
+    }
+    setup() {
         this.sprite = this.game.add.sprite(this.game.world.centerX - 48, 64, 'boss');
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
         this.sprite.animations.add('hit', [2, 3, 2, 3, 0], 10, true);
@@ -40,10 +40,9 @@ var Boss = (function () {
         this.sprite.body.collideWorldBounds = true;
         this.sprite.body.setSize(96, 96, 0, 0);
         this.sprite.body.velocity.x = this.velocity;
-    };
-    Boss.prototype.wasHit = function () {
+    }
+    wasHit() {
         this.sprite.animations.play('hit', 10, false);
-    };
-    return Boss;
-}());
+    }
+}
 //# sourceMappingURL=boss.js.map

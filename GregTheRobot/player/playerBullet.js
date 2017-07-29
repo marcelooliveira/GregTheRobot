@@ -1,5 +1,5 @@
-var PlayerBullet = (function () {
-    function PlayerBullet(level, layer, bulletSound, player, boss) {
+class PlayerBullet {
+    constructor(level, layer, bulletSound, player, boss) {
         this.level = level;
         this.game = level.game;
         this.layer = layer;
@@ -9,10 +9,9 @@ var PlayerBullet = (function () {
         this.destroyed = false;
         this.create();
     }
-    PlayerBullet.prototype.create = function () {
-    };
-    PlayerBullet.prototype.update = function () {
-        var _this = this;
+    create() {
+    }
+    update() {
         this.game.physics.arcade.collide(this.sprite, this.layer, function () {
             this.sprite.position.x = 0;
             this.sprite.position.y = 0;
@@ -26,20 +25,20 @@ var PlayerBullet = (function () {
             this.level.playerBulletHit(this, this.boss);
             this.destroyed = false;
         }.bind(this));
-        this.level.enemies.forEach(function (enemy) {
-            _this.game.physics.arcade.collide(_this.sprite, enemy.sprite, function () {
+        this.level.enemies.forEach(enemy => {
+            this.game.physics.arcade.collide(this.sprite, enemy.sprite, function () {
                 this.destroyed = false;
                 this.level.playerBulletHit(this, enemy);
                 this.sprite.destroy();
                 enemy.sprite.destroy();
-            }.bind(_this));
+            }.bind(this));
         });
         if (this.sprite.animations.currentFrame) {
             var currentFrameindex = this.sprite.animations.currentFrame.index;
             this.sprite.rotation = currentFrameindex * Math.PI / 4;
         }
-    };
-    PlayerBullet.prototype.setup = function () {
+    }
+    setup() {
         this.sprite = this.game.add.sprite(this.player.sprite.position.x, this.player.sprite.position.y - 32, 'playerBullet');
         this.sprite.animations.add('bullet', [0, 1, 2, 3, 4, 5, 6, 7], 24, true);
         this.sprite.animations.play('bullet');
@@ -49,7 +48,6 @@ var PlayerBullet = (function () {
         this.sprite.body.setSize(32, 32, 0, 0);
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.body.velocity.y = -this.velocity;
-    };
-    return PlayerBullet;
-}());
+    }
+}
 //# sourceMappingURL=playerbullet.js.map
