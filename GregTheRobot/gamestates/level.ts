@@ -108,6 +108,8 @@ class Level1 extends Phaser.State {
         this.game.camera.y = this.map.height * this.map.tileHeight;
 
         this.game.time.events.add(Phaser.Timer.SECOND, this.scroll.bind(this));
+
+        this.game.camera.y = 256;
     }
 
     setupAudio() {

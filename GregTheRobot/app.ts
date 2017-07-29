@@ -45,7 +45,7 @@ class KnightmareGame {
         this.game.load.spritesheet('enemy9', 'assets/sprites/enemy9.png', 32, 32);
         this.game.load.spritesheet('enemy10', 'assets/sprites/enemy10.png', 32, 32);
         this.game.load.spritesheet('enemy11', 'assets/sprites/enemy11.png', 32, 32);
-        this.game.load.atlasJSONHash('playerBullet', 'assets/sprites/PlayerBullet1SpriteSheet.png', 'assets/sprites/PlayerBullet1SpriteSheet.json');
+        this.game.load.spritesheet('playerBullet', 'assets/sprites/PlayerBullet1SpriteSheet.png', 32, 32);
 
         this.game.load.audio('start', ['assets/audio/Start.mp3']);
         this.game.load.audio('intro', ['assets/audio/Intro.mp3']);

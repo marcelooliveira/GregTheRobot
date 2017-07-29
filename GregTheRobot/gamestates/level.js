@@ -88,6 +88,7 @@ var Level1 = (function (_super) {
         this.map.setCollisionByExclusion([0]);
         this.game.camera.y = this.map.height * this.map.tileHeight;
         this.game.time.events.add(Phaser.Timer.SECOND, this.scroll.bind(this));
+        this.game.camera.y = 256;
     };
     Level1.prototype.setupAudio = function () {
         this.volume = .2;

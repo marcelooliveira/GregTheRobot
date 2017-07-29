@@ -17,12 +17,6 @@ var Player = (function () {
         this.game.physics.arcade.collide(this.sprite, this.layer);
         this.sprite.body.velocity.set(0);
         var currentFrameindex = this.sprite.animations.currentFrame.index;
-        if (currentFrameindex % 2 == 0) {
-            //this.sprite.position.y += .2; 
-        }
-        else {
-            //this.sprite.position.y -= .2; 
-        }
         switch (currentFrameindex) {
             case 0:
                 this.sprite.rotation = -.1;
@@ -43,7 +37,8 @@ var Player = (function () {
         this.state.update(this.cursors, this.game.input.keyboard, this.game.camera);
     };
     Player.prototype.setup = function () {
-        this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 64, 'player');
+        //this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 64, 'player');
+        this.sprite = this.game.add.sprite(this.game.world.centerX - 16, 256, 'player');
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
         this.sprite.animations.add('die', [4, 5, 6, 7, 4, 5, 6, 7], 10, true);
         this.sprite.animations.play('run');

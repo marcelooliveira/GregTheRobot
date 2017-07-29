@@ -49,7 +49,7 @@
 
     setup() {
         this.sprite = this.game.add.sprite(this.game.world.centerX - 48, 64, 'boss');
-        this.sprite.animations.add('run', [0, 1], 2, true);
+        this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
         this.sprite.animations.add('hit', [2, 3, 2, 3, 0], 10, true);
         this.sprite.animations.play('run');
         this.velocity = 150;
