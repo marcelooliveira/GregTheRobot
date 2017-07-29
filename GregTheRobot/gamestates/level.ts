@@ -204,8 +204,9 @@ class Level1 extends Phaser.State {
         var playerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
         playerBullet.setup();
         this.playerBullets.push(playerBullet);
-        this.player.power -= 10;
-        this.updatePowerBar();
+        if (this.player.decreasePower(1)) {
+            this.updatePowerBar();
+        }
     }
 
     playerBulletHit(playerBullet, target) {

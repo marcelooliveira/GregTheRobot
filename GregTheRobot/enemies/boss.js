@@ -15,7 +15,9 @@ var Boss = (function () {
             this.sprite.body.velocity.x = this.velocity;
         }.bind(this));
         this.game.physics.arcade.collide(this.sprite, this.player.sprite, function () {
-            this.player.wasHit(this);
+            if (this.player.sprite.animations.currentAnim.name == 'run') {
+                this.player.wasHit(this);
+            }
         }.bind(this));
         //if (this.isWeaponLoaded && this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
         //    this.isWeaponLoaded = false;

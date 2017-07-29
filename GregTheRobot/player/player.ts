@@ -134,4 +134,14 @@ class Player implements IPlayer {
         this.bulletSound.play();
         this.level.firePlayerBullet();
     }
+
+    decreasePower(energyAmount: number) : boolean {
+        if (this.power - energyAmount > 0) {
+            this.power -= energyAmount;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

@@ -62,7 +62,7 @@ class GregTheRobot {
         this.game.state.add('menu', Menu);
         this.game.state.add('splash01', Splash01);
         this.game.state.add('level1', Level1);
-        this.game.state.start('level1');
+        this.game.state.start('menu');
     }
 
 
