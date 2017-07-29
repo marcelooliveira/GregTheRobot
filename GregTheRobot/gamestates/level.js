@@ -139,7 +139,6 @@ var Level1 = (function (_super) {
         this.statusBar = this.addText(0, 46.5, 'POWER');
     };
     Level1.prototype.updatePowerBar = function () {
-        this.game.debug.text(this.player.power.toString(), 200, 200);
         this.powerBar.beginFill(0x000000);
         this.powerBar.lineStyle(2, 0x000000, 1);
         this.powerBar.drawRect(0, 740, 512, 32);
@@ -168,8 +167,9 @@ var Level1 = (function (_super) {
         var playerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
         playerBullet.setup();
         this.playerBullets.push(playerBullet);
-        this.player.power -= 10;
-        this.updatePowerBar();
+        if (this.player.decreasePower(1)) {
+            this.updatePowerBar();
+        }
     };
     Level1.prototype.playerBulletHit = function (playerBullet, target) {
         var _this = this;

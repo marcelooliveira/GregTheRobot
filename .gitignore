@@ -286,3 +286,11 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+*.map
+GregTheRobot/enemies/boss.js.map
+*.map
+*.map
+GregTheRobot/gamestates/level.js.map
+*.map
+*.map
+GregTheRobot/app.js.map

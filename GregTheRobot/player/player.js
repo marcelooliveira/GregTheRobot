@@ -88,6 +88,15 @@ var Player = (function () {
         this.bulletSound.play();
         this.level.firePlayerBullet();
     };
+    Player.prototype.decreasePower = function (energyAmount) {
+        if (this.power - energyAmount > 0) {
+            this.power -= energyAmount;
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     return Player;
 }());
 //# sourceMappingURL=player.js.map

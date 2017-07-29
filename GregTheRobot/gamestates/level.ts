@@ -172,7 +172,6 @@ class Level1 extends Phaser.State {
     }
 
     updatePowerBar() {
-        this.game.debug.text(this.player.power.toString(), 200, 200);
         this.powerBar.beginFill(0x000000);
         this.powerBar.lineStyle(2, 0x000000, 1);
         this.powerBar.drawRect(0, 740, 512, 32);

@@ -12,10 +12,10 @@ var Enemy = (function () {
         this.enemyNumber = enemyNumber;
         this.velocity = 16;
     }
-    create() {
+    Enemy.prototype.create = function () {
         this.isWeaponLoaded = true;
-    }
-    update() {
+    };
+    Enemy.prototype.update = function () {
         if (this.sprite.inCamera) {
             this.sprite.body.velocity.y = this.velocity;
         }
@@ -23,17 +23,18 @@ var Enemy = (function () {
             this.level.playerWasHit(this);
             this.sprite.destroy();
         }.bind(this));
-    }
-    setup() {
+    };
+    Enemy.prototype.setup = function () {
         this.sprite = this.game.add.sprite(this.x, this.y, 'enemy' + this.enemyNumber);
         this.sprite.animations.add('run', [0, 1, 2, 3, 2, 1], 4, true);
         this.sprite.animations.play('run');
         this.game.physics.arcade.enable(this.sprite);
         this.sprite.body.collideWorldBounds = true;
         this.sprite.body.setSize(32, 32, 0, 0);
-    }
-    wasHit() {
+    };
+    Enemy.prototype.wasHit = function () {
         //this.sprite.animations.play('hit', 10, false);
-    }
-}
+    };
+    return Enemy;
+}());
 //# sourceMappingURL=enemy.js.map
