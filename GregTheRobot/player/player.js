@@ -45,7 +45,7 @@ var Player = (function () {
     Player.prototype.setup = function () {
         this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 64, 'player');
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
-        this.sprite.animations.add('die', [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 10, true);
+        this.sprite.animations.add('die', [4, 5, 6, 7, 4, 5, 6, 7], 10, true);
         this.sprite.animations.play('run');
         this.velocity = 150;
         this.walkingVelocity = 60;
