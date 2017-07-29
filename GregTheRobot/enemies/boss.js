@@ -10,6 +10,9 @@ var Boss = (function () {
         this.isWeaponLoaded = true;
     };
     Boss.prototype.update = function () {
+        this.game.debug.text('boss x, y: '
+            + parseInt(this.sprite.position.x.toString())
+            + ', ' + parseInt(this.sprite.position.y.toString()), 32, 32);
         this.game.physics.arcade.collide(this.sprite, this.layer, function () {
             this.velocity *= -1;
             this.sprite.body.velocity.x = this.velocity;
