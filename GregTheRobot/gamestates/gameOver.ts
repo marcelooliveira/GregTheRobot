@@ -8,6 +8,7 @@ class GameOver extends BaseState {
     create() {
         this.addText(12, 12, 'GAME OVER');
         this.gameOverSound = this.game.add.audio('gameOver');
+        this.gameOverSound.volume = 0;
         this.gameOverSound.onStop.add(function () {
             this.game.state.start('menu');
         }.bind(this));

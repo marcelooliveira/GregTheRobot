@@ -24,6 +24,8 @@ abstract class BaseLevel extends Phaser.State {
     bulletSound: Phaser.Sound;
     diedSound: Phaser.Sound;
     damageSound: Phaser.Sound;
+    rechargeSound: Phaser.Sound;
+    bossDeathSound: Phaser.Sound;
     statusBar: Phaser.BitmapText;
     powerBar: Phaser.Graphics;
     volume: number;
@@ -71,7 +73,7 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     setupMap() {
-        this.tileSprite = this.game.add.tileSprite(0, 0, 512, 3776, 'level');
+        this.tileSprite = this.game.add.tileSprite(0, 0, 512, 3776, 'level' + this.levelNumber);
         this.game.world.setBounds(0, 0, 512, 3776);
 
         //  Creates a blank tilemap
@@ -124,8 +126,6 @@ abstract class BaseLevel extends Phaser.State {
         this.game.camera.y = this.map.height * this.map.tileHeight;
 
         this.game.time.events.add(Phaser.Timer.SECOND, this.scroll.bind(this));
-
-        //this.game.camera.y = 256;
     }
 
     setupAudio() {
@@ -146,16 +146,29 @@ abstract class BaseLevel extends Phaser.State {
 
         this.damageSound = this.game.add.audio('damage');
         this.damageSound.volume = this.volume;
+
+        this.rechargeSound = this.game.add.audio('recharge');
+        this.rechargeSound.volume = this.volume;
+
+        this.bossDeathSound = this.game.add.audio('bossDeath');
+        this.bossDeathSound.volume = this.volume;
+        this.bossDeathSound.onStop.add(function () {
+            this.levelMusic.stop();
+            this.bulletSound.stop();
+            this.bulletSound.volume = 0;
+
+            this.game.state.start('splash' + (this.levelNumber + 1));
+        }.bind(this));
     }
 
-    setupPlayer() : void {
-        this.player = new Player(this, this.cursors, this.layer, this.bulletSound, this.diedSound, this.damageSound);
+    setupPlayer(): void {
+        this.player = new Player(this, this.cursors, this.layer, this.bulletSound, this.diedSound, this.damageSound, this.rechargeSound);
         this.player.setup();
         this.updatePowerBar();
     }
 
     setupBoss() {
-        this.boss = new Boss(this.game, this.layer, this.bulletSound, this.player);
+        this.boss = new Boss(this, this.game, this.layer, this.bulletSound, this.player);
         this.boss.setup();
     }
 
@@ -289,6 +302,10 @@ abstract class BaseLevel extends Phaser.State {
         }
     }
 
+    bossKill() {
+        this.bossDeathSound.play();
+    }
+
     getScrollStep() {
         return 1;
     }
@@ -337,5 +354,19 @@ class Level1 extends BaseLevel {
     constructor() {
         super();
         this.levelNumber = 1;
+    }
+}
+
+class Level2 extends BaseLevel {
+    constructor() {
+        super();
+        this.levelNumber = 2;
+    }
+}
+
+class Level3 extends BaseLevel {
+    constructor() {
+        super();
+        this.levelNumber = 3;
     }
 }

@@ -15,7 +15,7 @@ class Menu extends BaseState {
 
         this.startSound = this.game.add.audio('start');
         this.startSound.onStop.add(function () {
-            this.game.state.start('splash01');
+            this.game.state.start('splash1');
         }.bind(this));
     }
 

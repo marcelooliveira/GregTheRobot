@@ -17,13 +17,14 @@ interface IPlayer {
 }
 
 class Player implements IPlayer {
-    level: Level1;
+    level: BaseLevel;
     game: Phaser.Game;
     cursors: Phaser.CursorKeys;
     layer: Phaser.TilemapLayer;
     bulletSound: Phaser.Sound;
     diedSound: Phaser.Sound;
     damageSound: Phaser.Sound;
+    rechargeSound: Phaser.Sound;
     sprite: Phaser.Sprite;
     isWeaponLoaded: boolean;
     velocity: number;
@@ -33,7 +34,8 @@ class Player implements IPlayer {
     constructor(
         level: Level1, cursors: Phaser.CursorKeys,
         layer: Phaser.TilemapLayer, bulletSound: Phaser.Sound,
-        diedSound: Phaser.Sound, damageSound: Phaser.Sound) {
+        diedSound: Phaser.Sound, damageSound: Phaser.Sound,
+        rechargeSound: Phaser.Sound) {
         this.level = level;
         this.game = level.game;
         this.cursors = cursors;
@@ -41,6 +43,7 @@ class Player implements IPlayer {
         this.bulletSound = bulletSound;
         this.diedSound = diedSound;
         this.damageSound = damageSound;
+        this.rechargeSound = rechargeSound;
         this.damageSound.onStop.add(function () {
             this.sprite.animations.play('run');
         }.bind(this));
@@ -108,7 +111,7 @@ class Player implements IPlayer {
     }
 
     recharged(charge: number) {
-        this.damageSound.play();
+        this.rechargeSound.play();
         //this.sprite.animations.play('hit');
         this.increasePower(charge);
     }

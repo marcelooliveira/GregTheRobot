@@ -1,7 +1,7 @@
 /// <reference path="../app.ts" />
 /// <reference path="playerState.ts" />
 class Player {
-    constructor(level, cursors, layer, bulletSound, diedSound, damageSound) {
+    constructor(level, cursors, layer, bulletSound, diedSound, damageSound, rechargeSound) {
         this.level = level;
         this.game = level.game;
         this.cursors = cursors;
@@ -9,6 +9,7 @@ class Player {
         this.bulletSound = bulletSound;
         this.diedSound = diedSound;
         this.damageSound = damageSound;
+        this.rechargeSound = rechargeSound;
         this.damageSound.onStop.add(function () {
             this.sprite.animations.play('run');
         }.bind(this));
@@ -65,7 +66,7 @@ class Player {
         this.decreasePower(1);
     }
     recharged(charge) {
-        this.damageSound.play();
+        this.rechargeSound.play();
         //this.sprite.animations.play('hit');
         this.increasePower(charge);
     }
