@@ -72,8 +72,8 @@
     <Content Include="assets\audio\walk-to-find-leprechau.wav" />
     <Content Include="assets\backgrounds\menu.png" />
     <Content Include="assets\backgrounds\splash01.png" />
-    <Content Include="assets\fonts\konami.xml" />
-    <Content Include="assets\fonts\konami_0.png" />
+    <Content Include="assets\fonts\bitmapfont.xml" />
+    <Content Include="assets\fonts\bitmapfont_0.png" />
     <Content Include="assets\maps\Map01.txt" />
     <Content Include="assets\sprites\boss.png" />
     <Content Include="assets\sprites\enemy10.png" />
@@ -90,9 +90,6 @@
     <Content Include="assets\sprites\enemy8.png" />
     <Content Include="assets\sprites\enemy9.png" />
     <Content Include="assets\sprites\player.png" />
-    <Content Include="assets\sprites\player.json" />
-    <Content Include="assets\sprites\boss.json" />
-    <Content Include="assets\sprites\PlayerBullet1SpriteSheet.json" />
     <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -104,15 +101,6 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="assets\backgrounds\level01.jpg" />
-    <Content Include="assets\sprites\PlayerBullet1SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBullet2SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBullet3SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBullet4SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBullet51SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBullet5SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBullet6SpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerBulletSpriteSheet.png" />
-    <Content Include="assets\sprites\PlayerDestructionSpriteSheet.png" />
     <Content Include="index.html" />
     <TypeScriptCompile Include="gamestates\baseState.ts" />
     <TypeScriptCompile Include="gamestates\gameOver.ts" />

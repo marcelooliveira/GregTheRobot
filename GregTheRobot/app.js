@@ -52,7 +52,7 @@ class GregTheRobot {
         this.game.load.audio('damage', ['assets/audio/canon-1.wav']);
         this.game.load.audio('died', ['assets/audio/died.wav']);
         this.game.load.audio('gameOver', ['assets/audio/died.wav']);
-        this.game.load.bitmapFont('konami', 'assets/fonts/konami_0.png', 'assets/fonts/konami.xml');
+        this.game.load.bitmapFont('bitmapfont', 'assets/fonts/bitmapfont_0.png', 'assets/fonts/bitmapfont.xml');
     }
     create() {
         this.game.state.add('menu', Menu);

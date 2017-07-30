@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <font>
-  <info face="Super Contra NES" size="32" bold="0" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="1" padding="0,0,0,0" spacing="1,1" outline="0"/>
+  <info face="GregTheRobot" size="32" bold="0" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="1" padding="0,0,0,0" spacing="1,1" outline="0"/>
   <common lineHeight="32" base="32" scaleW="256" scaleH="512" pages="1" packed="0" alphaChnl="1" redChnl="0" greenChnl="0" blueChnl="0"/>
   <pages>
-    <page id="0" file="konami_0.png" />
+    <page id="0" file="bitmapfont_0.png" />
   </pages>
   <chars count="66">
     <char id="32" x="221" y="264" width="15" height="1" xoffset="-5" yoffset="31" xadvance="37" page="0" chnl="15" />
