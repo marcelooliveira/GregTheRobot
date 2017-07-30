@@ -33,7 +33,6 @@ class Enemy {
         this.sprite.body.setSize(32, 32, 0, 0);
     }
     wasHit() {
-        //this.sprite.animations.play('hit', 10, false);
     }
 }
 //# sourceMappingURL=enemy.js.map

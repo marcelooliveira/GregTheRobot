@@ -90,6 +90,7 @@
     <Content Include="assets\sprites\enemy8.png" />
     <Content Include="assets\sprites\enemy9.png" />
     <Content Include="assets\sprites\player.png" />
+    <Content Include="assets\sprites\PlayerBullet1SpriteSheet.png" />
     <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -102,6 +103,7 @@
     <Content Include="app.css" />
     <Content Include="assets\backgrounds\level01.jpg" />
     <Content Include="index.html" />
+    <TypeScriptCompile Include="extras\battery.ts" />
     <TypeScriptCompile Include="gamestates\baseState.ts" />
     <TypeScriptCompile Include="gamestates\gameOver.ts" />
     <TypeScriptCompile Include="gamestates\splash.ts" />

@@ -35,9 +35,11 @@ class GregTheRobot {
         this.game.load.script('playerState', 'player/playerState.js');
         this.game.load.script('boss', 'enemies/boss.js');
         this.game.load.script('enemy', 'enemies/enemy.js');
+        this.game.load.script('battery', 'extras/battery.js');
 
         this.game.load.image('level', 'assets/backgrounds/level01.jpg');
         this.game.load.spritesheet('player', 'assets/sprites/player.png', 32, 32);
+        this.game.load.spritesheet('battery', 'assets/sprites/battery.png', 32, 32);
         this.game.load.spritesheet('boss', 'assets/sprites/boss.png', 96, 96);
         this.game.load.spritesheet('enemy1', 'assets/sprites/enemy1.png', 32, 32);
         this.game.load.spritesheet('enemy2', 'assets/sprites/enemy2.png', 32, 32);

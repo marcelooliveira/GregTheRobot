@@ -107,6 +107,12 @@ class Player implements IPlayer {
         this.decreasePower(1);
     }
 
+    recharged(charge: number) {
+        this.damageSound.play();
+        //this.sprite.animations.play('hit');
+        this.increasePower(charge);
+    }
+
     resurrect() {
         this.sprite.animations.play('walk');
         this.state = new PlayerStateRunning(this);
@@ -158,6 +164,22 @@ class Player implements IPlayer {
             this.state = new PlayerStateDying(this);
             this.diedSound.play();
             this.level.playerStateChanged(this.state);
+            return false;
+        }
+    }
+
+    increasePower(energyAmount: number): boolean {
+        if (this.power + energyAmount < 100) {
+            this.power += energyAmount;
+            this.level.updatePowerBar();
+            return true;
+        }
+        else {
+            this.power = 100;
+            this.level.updatePowerBar();
+            //this.state = new PlayerStateDying(this);
+            //this.diedSound.play();
+            //this.level.playerStateChanged(this.state);
             return false;
         }
     }

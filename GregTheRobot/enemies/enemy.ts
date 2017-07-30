@@ -52,6 +52,5 @@ class Enemy {
     }
 
     wasHit() {
-        //this.sprite.animations.play('hit', 10, false);
     }
 }

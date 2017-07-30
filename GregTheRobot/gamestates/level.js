@@ -16,7 +16,7 @@ class Level1 extends Phaser.State {
         this.setupStatusBar();
         this.setupPlayer();
         this.setupBoss();
-        this.setupEnemies();
+        this.setupMapObjects();
         this.setupPlayerBullets();
     }
     update() {
@@ -25,6 +25,9 @@ class Level1 extends Phaser.State {
         this.boss.update();
         this.enemies.forEach(enemy => {
             enemy.update();
+        });
+        this.extras.forEach(extra => {
+            extra.update();
         });
         this.playerBullets.forEach(bullet => {
             bullet.update();
@@ -107,12 +110,39 @@ class Level1 extends Phaser.State {
         this.boss = new Boss(this.game, this.layer, this.bulletSound, this.player);
         this.boss.setup();
     }
-    setupEnemies() {
+    setupMapObjects() {
+        var mapAsStringArray = this.readFile("/assets/maps/Map01.txt").split('\n');
+        this.setupExtras(mapAsStringArray);
+        this.setupEnemies(mapAsStringArray);
+    }
+    setupExtras(mapAsStringArray) {
+        this.extras = [];
+        var extracodes = 'A';
+        for (var y = 0; y < mapAsStringArray.length; y++) {
+            var line = mapAsStringArray[y];
+            for (var x = 0; x < line.length; x++) {
+                var char = line[x];
+                var indexOf = extracodes.indexOf(char);
+                if (indexOf >= 0) {
+                    var extra;
+                    switch (char) {
+                        case 'A':
+                            extra = new Battery(this, this.game, this.layer, this.player, x * 32, y * 32, this.extras.length + 1);
+                            break;
+                        default:
+                            break;
+                    }
+                    extra.setup();
+                    this.extras.push(extra);
+                }
+            }
+        }
+    }
+    setupEnemies(mapAsStringArray) {
         this.enemies = [];
         var enemycodes = 'abcdefghijklmnop';
-        var lines = this.readFile("/assets/maps/Map01.txt").split('\n');
-        for (var y = 0; y < lines.length; y++) {
-            var line = lines[y];
+        for (var y = 0; y < mapAsStringArray.length; y++) {
+            var line = mapAsStringArray[y];
             for (var x = 0; x < line.length; x++) {
                 var char = line[x];
                 var indexOf = enemycodes.indexOf(char);
@@ -201,6 +231,15 @@ class Level1 extends Phaser.State {
         this.enemies.forEach((e, i) => {
             if (e === enemy) {
                 this.enemies.splice(i, 1);
+                return true;
+            }
+        });
+    }
+    playerRecharged(battery) {
+        this.player.recharged(10);
+        this.enemies.forEach((e, i) => {
+            if (e === battery) {
+                this.extras.splice(i, 1);
                 return true;
             }
         });

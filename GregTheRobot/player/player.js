@@ -64,6 +64,11 @@ class Player {
         this.sprite.animations.play('hit');
         this.decreasePower(1);
     }
+    recharged(charge) {
+        this.damageSound.play();
+        //this.sprite.animations.play('hit');
+        this.increasePower(charge);
+    }
     resurrect() {
         this.sprite.animations.play('walk');
         this.state = new PlayerStateRunning(this);
@@ -108,6 +113,21 @@ class Player {
             this.state = new PlayerStateDying(this);
             this.diedSound.play();
             this.level.playerStateChanged(this.state);
+            return false;
+        }
+    }
+    increasePower(energyAmount) {
+        if (this.power + energyAmount < 100) {
+            this.power += energyAmount;
+            this.level.updatePowerBar();
+            return true;
+        }
+        else {
+            this.power = 100;
+            this.level.updatePowerBar();
+            //this.state = new PlayerStateDying(this);
+            //this.diedSound.play();
+            //this.level.playerStateChanged(this.state);
             return false;
         }
     }
