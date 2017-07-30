@@ -1,7 +1,7 @@
 /// <reference path="../app.ts" />
 /// <reference path="playerState.ts" />
-var Player = (function () {
-    function Player(level, cursors, layer, bulletSound) {
+class Player {
+    constructor(level, cursors, layer, bulletSound) {
         this.level = level;
         this.game = level.game;
         this.cursors = cursors;
@@ -10,11 +10,11 @@ var Player = (function () {
         this.power = 100;
         this.create();
     }
-    Player.prototype.create = function () {
+    create() {
         this.isWeaponLoaded = true;
         this.state = new PlayerStateRunning(this);
-    };
-    Player.prototype.update = function () {
+    }
+    update() {
         this.game.physics.arcade.collide(this.sprite, this.layer);
         this.sprite.body.velocity.set(0);
         var currentFrameindex = this.sprite.animations.currentFrame.index;
@@ -36,8 +36,8 @@ var Player = (function () {
                 break;
         }
         this.state.update(this.cursors, this.game.input.keyboard, this.game.camera);
-    };
-    Player.prototype.setup = function () {
+    }
+    setup() {
         //this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 64, 'player');
         this.sprite = this.game.add.sprite(this.game.world.centerX - 16, 256, 'player');
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
@@ -50,45 +50,45 @@ var Player = (function () {
         this.sprite.body.collideWorldBounds = true;
         this.sprite.body.setSize(32, 32, 0, 0);
         this.sprite.anchor.setTo(0.5, 0.5);
-    };
-    Player.prototype.setStrategy = function (strategy) {
+    }
+    setStrategy(strategy) {
         this.state = new PlayerStateRunning(this);
-    };
-    Player.prototype.wasHit = function () {
+    }
+    wasHit() {
         this.sprite.animations.play('hit');
         //this.state = new PlayerStateDying(this);
         this.power -= 10;
         this.level.updatePowerBar();
-    };
-    Player.prototype.resurrect = function () {
+    }
+    resurrect() {
         this.sprite.animations.play('walk');
         this.state = new PlayerStateRunning(this);
-    };
-    Player.prototype.walk = function () {
+    }
+    walk() {
         if (!this.cursors.down.isDown
             && !this.cursors.up.isDown
             && !this.cursors.left.isDown
             && !this.cursors.right.isDown) {
             this.sprite.body.velocity.y = -this.walkingVelocity;
         }
-    };
-    Player.prototype.runUp = function () {
+    }
+    runUp() {
         this.sprite.body.velocity.y = -this.velocity;
-    };
-    Player.prototype.runDown = function () {
+    }
+    runDown() {
         this.sprite.body.velocity.y = this.velocity;
-    };
-    Player.prototype.runLeft = function () {
+    }
+    runLeft() {
         this.sprite.body.velocity.x = -this.velocity;
-    };
-    Player.prototype.runRight = function () {
+    }
+    runRight() {
         this.sprite.body.velocity.x = this.velocity;
-    };
-    Player.prototype.shoot = function () {
+    }
+    shoot() {
         this.bulletSound.play();
         this.level.firePlayerBullet();
-    };
-    Player.prototype.decreasePower = function (energyAmount) {
+    }
+    decreasePower(energyAmount) {
         if (this.power - energyAmount > 0) {
             this.power -= energyAmount;
             return true;
@@ -96,7 +96,6 @@ var Player = (function () {
         else {
             return false;
         }
-    };
-    return Player;
-}());
+    }
+}
 //# sourceMappingURL=player.js.map

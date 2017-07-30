@@ -7,14 +7,14 @@
 /// <reference path="player/player.ts" />
 /// <reference path="player/playerbullet.ts" />
 /// <reference path="player/playerstate.ts" />
-var GregTheRobot = (function () {
-    function GregTheRobot() {
+class GregTheRobot {
+    constructor() {
         this.game = new Phaser.Game(512, 512, Phaser.AUTO, 'content', {
             create: this.create, preload: this.preload,
             update: this.update
         });
     }
-    GregTheRobot.prototype.preload = function () {
+    preload() {
         this.game.load.spritesheet('menu', 'assets/backgrounds/menu.png', 512, 384);
         this.game.load.spritesheet('splash01', 'assets/backgrounds/splash01.png', 512, 384);
         this.game.load.script('baseState', 'gamestates/baseState.js');
@@ -47,20 +47,19 @@ var GregTheRobot = (function () {
         this.game.load.audio('playerDeath', ['assets/audio/Death.mp3']);
         this.game.load.audio('bulletSound', ['assets/audio/PlayerBullet1Shooting.wav']);
         this.game.load.bitmapFont('konami', 'assets/fonts/konami_0.png', 'assets/fonts/konami.xml');
-    };
-    GregTheRobot.prototype.create = function () {
+    }
+    create() {
         this.game.state.add('menu', Menu);
         this.game.state.add('splash01', Splash01);
         this.game.state.add('level1', Level1);
         this.game.state.start('level1');
-    };
-    GregTheRobot.prototype.update = function () {
-    };
-    GregTheRobot.prototype.render = function () {
-    };
-    return GregTheRobot;
-}());
-window.onload = function () {
+    }
+    update() {
+    }
+    render() {
+    }
+}
+window.onload = () => {
     var game = new GregTheRobot();
 };
 //# sourceMappingURL=app.js.map

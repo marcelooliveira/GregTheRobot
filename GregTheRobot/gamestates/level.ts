@@ -97,10 +97,15 @@ class Level1 extends Phaser.State {
         var lines = this.readFile("/assets/maps/Map01.txt").split('\n');
         for (var y = 0; y < lines.length; y++) {
             var line = lines[y];
+            var lineArray = new Array(line.length);
             for (var x = 0; x < line.length; x++) {
                 var char = line[x];
                 if (char == 'X') {
                     this.map.putTile(1, x, y, this.layer);
+                    lineArray[x] = 1;
+                }
+                else {
+                    lineArray[x] = 0;
                 }
             }
         }

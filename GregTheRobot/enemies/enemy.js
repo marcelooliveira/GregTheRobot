@@ -1,6 +1,6 @@
 /// <reference path="../app.ts" />
-var Enemy = (function () {
-    function Enemy(level, game, layer, bulletSound, player, x, y, enemyNumber) {
+class Enemy {
+    constructor(level, game, layer, bulletSound, player, x, y, enemyNumber) {
         this.level = level;
         this.game = game;
         this.layer = layer;
@@ -12,10 +12,10 @@ var Enemy = (function () {
         this.enemyNumber = enemyNumber;
         this.velocity = 16;
     }
-    Enemy.prototype.create = function () {
+    create() {
         this.isWeaponLoaded = true;
-    };
-    Enemy.prototype.update = function () {
+    }
+    update() {
         if (this.sprite.inCamera) {
             this.sprite.body.velocity.y = this.velocity;
         }
@@ -23,18 +23,17 @@ var Enemy = (function () {
             this.level.playerWasHit(this);
             this.sprite.destroy();
         }.bind(this));
-    };
-    Enemy.prototype.setup = function () {
+    }
+    setup() {
         this.sprite = this.game.add.sprite(this.x, this.y, 'enemy' + this.enemyNumber);
         this.sprite.animations.add('run', [0, 1, 2, 3, 2, 1], 4, true);
         this.sprite.animations.play('run');
         this.game.physics.arcade.enable(this.sprite);
         this.sprite.body.collideWorldBounds = true;
         this.sprite.body.setSize(32, 32, 0, 0);
-    };
-    Enemy.prototype.wasHit = function () {
+    }
+    wasHit() {
         //this.sprite.animations.play('hit', 10, false);
-    };
-    return Enemy;
-}());
+    }
+}
 //# sourceMappingURL=enemy.js.map

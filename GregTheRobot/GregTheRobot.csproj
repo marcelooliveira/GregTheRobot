@@ -110,6 +110,7 @@
     <Content Include="assets\sprites\player.json" />
     <Content Include="assets\sprites\boss.json" />
     <Content Include="assets\sprites\PlayerBullet1SpriteSheet.json" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

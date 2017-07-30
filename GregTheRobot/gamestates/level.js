@@ -5,24 +5,10 @@
 /// <reference path="../player/player.ts" />
 /// <reference path="../player/playerbullet.ts" />
 /// <reference path="../player/playerstate.ts" />
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Level1 = (function (_super) {
-    __extends(Level1, _super);
-    function Level1() {
-        return _super !== null && _super.apply(this, arguments) || this;
+class Level1 extends Phaser.State {
+    preload() {
     }
-    Level1.prototype.preload = function () {
-    };
-    Level1.prototype.create = function () {
+    create() {
         this.setupAudio();
         this.setupMap();
         this.setupKeyboard();
@@ -31,28 +17,28 @@ var Level1 = (function (_super) {
         this.setupBoss();
         this.setupEnemies();
         this.setupPlayerBullets();
-    };
-    Level1.prototype.update = function () {
+    }
+    update() {
         this.game.input.update();
         this.player.update();
         this.boss.update();
-        this.enemies.forEach(function (enemy) {
+        this.enemies.forEach(enemy => {
             enemy.update();
         });
-        this.playerBullets.forEach(function (bullet) {
+        this.playerBullets.forEach(bullet => {
             bullet.update();
         });
-    };
-    Level1.prototype.render = function () {
-    };
-    Level1.prototype.readFile = function (file) {
+    }
+    render() {
+    }
+    readFile(file) {
         var request = new XMLHttpRequest();
         request.open("GET", file, false);
         request.send(null);
         var returnValue = request.responseText;
         return returnValue;
-    };
-    Level1.prototype.setupMap = function () {
+    }
+    setupMap() {
         this.tileSprite = this.game.add.tileSprite(0, 0, 512, 3776, 'level');
         this.game.world.setBounds(0, 0, 512, 3776);
         //  Creates a blank tilemap
@@ -79,10 +65,15 @@ var Level1 = (function (_super) {
         var lines = this.readFile("/assets/maps/Map01.txt").split('\n');
         for (var y = 0; y < lines.length; y++) {
             var line = lines[y];
+            var lineArray = new Array(line.length);
             for (var x = 0; x < line.length; x++) {
                 var char = line[x];
                 if (char == 'X') {
                     this.map.putTile(1, x, y, this.layer);
+                    lineArray[x] = 1;
+                }
+                else {
+                    lineArray[x] = 0;
                 }
             }
         }
@@ -90,8 +81,8 @@ var Level1 = (function (_super) {
         this.game.camera.y = this.map.height * this.map.tileHeight;
         this.game.time.events.add(Phaser.Timer.SECOND, this.scroll.bind(this));
         this.game.camera.y = 256;
-    };
-    Level1.prototype.setupAudio = function () {
+    }
+    setupAudio() {
         this.volume = .2;
         this.levelMusic = this.game.add.audio('music');
         this.levelMusic.volume = this.volume;
@@ -101,17 +92,17 @@ var Level1 = (function (_super) {
         this.bulletSound = this.game.add.audio('bulletSound');
         this.bulletSound.volume = this.volume;
         this.bulletSound.allowMultiple = true;
-    };
-    Level1.prototype.setupPlayer = function () {
+    }
+    setupPlayer() {
         this.player = new Player(this, this.cursors, this.layer, this.bulletSound);
         this.player.setup();
         this.updatePowerBar();
-    };
-    Level1.prototype.setupBoss = function () {
+    }
+    setupBoss() {
         this.boss = new Boss(this.game, this.layer, this.bulletSound, this.player);
         this.boss.setup();
-    };
-    Level1.prototype.setupEnemies = function () {
+    }
+    setupEnemies() {
         this.enemies = [];
         var enemycodes = 'abcdefghijklmnop';
         var lines = this.readFile("/assets/maps/Map01.txt").split('\n');
@@ -127,18 +118,18 @@ var Level1 = (function (_super) {
                 }
             }
         }
-    };
-    Level1.prototype.setupPlayerBullets = function () {
+    }
+    setupPlayerBullets() {
         this.playerBullets = [];
-    };
-    Level1.prototype.setupKeyboard = function () {
+    }
+    setupKeyboard() {
         this.cursors = this.game.input.keyboard.createCursorKeys();
-    };
-    Level1.prototype.setupStatusBar = function () {
+    }
+    setupStatusBar() {
         this.powerBar = this.game.add.graphics(0, 0);
         this.statusBar = this.addText(0, 46.5, 'POWER');
-    };
-    Level1.prototype.updatePowerBar = function () {
+    }
+    updatePowerBar() {
         this.powerBar.beginFill(0x000000);
         this.powerBar.lineStyle(2, 0x000000, 1);
         this.powerBar.drawRect(0, 740, 512, 32);
@@ -159,59 +150,57 @@ var Level1 = (function (_super) {
         this.powerBar.lineStyle(2, 0xffffff, 0);
         this.powerBar.drawRect(92, 742, (this.player.power / 100) * 417, 20);
         this.powerBar.endFill();
-    };
-    Level1.prototype.addText = function (x, y, text) {
+    }
+    addText(x, y, text) {
         return this.game.add.bitmapText(2 * (x * 8) + 2, 2 * (y * 8) + 2, 'konami', text, 13.8);
-    };
-    Level1.prototype.firePlayerBullet = function () {
+    }
+    firePlayerBullet() {
         var playerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
         playerBullet.setup();
         this.playerBullets.push(playerBullet);
         if (this.player.decreasePower(1)) {
             this.updatePowerBar();
         }
-    };
-    Level1.prototype.playerBulletHit = function (playerBullet, target) {
-        var _this = this;
-        this.playerBullets.forEach(function (b, i) {
+    }
+    playerBulletHit(playerBullet, target) {
+        this.playerBullets.forEach((b, i) => {
             if (b == playerBullet) {
-                _this.playerBullets.splice(i, 1);
+                this.playerBullets.splice(i, 1);
                 return true;
             }
         });
-        this.enemies.forEach(function (e, i) {
+        this.enemies.forEach((e, i) => {
             if (e == target) {
-                _this.enemies.splice(i, 1);
+                this.enemies.splice(i, 1);
                 return true;
             }
         });
         if (target.wasHit) {
             target.wasHit();
         }
-    };
-    Level1.prototype.getScrollStep = function () {
+    }
+    getScrollStep() {
         return 1;
-    };
-    Level1.prototype.playerWasHit = function (enemy) {
-        var _this = this;
+    }
+    playerWasHit(enemy) {
         if (this.player.sprite.animations.currentAnim.name == 'run') {
             //this.levelMusic.stop();
             //this.playerDeathSound.play();
             this.player.wasHit();
         }
-        this.enemies.forEach(function (e, i) {
+        this.enemies.forEach((e, i) => {
             if (e === enemy) {
-                _this.enemies.splice(i, 1);
+                this.enemies.splice(i, 1);
                 return true;
             }
         });
-    };
-    Level1.prototype.soundStopped = function (sound) {
+    }
+    soundStopped(sound) {
         if (sound.name == 'playerDeath') {
             this.game.state.start('splash01');
         }
-    };
-    Level1.prototype.scroll = function () {
+    }
+    scroll() {
         this.game.camera.y -= this.getScrollStep();
         if (this.game.camera.y > 0) {
             this.statusBar.position.y -= this.getScrollStep();
@@ -225,7 +214,6 @@ var Level1 = (function (_super) {
         //    this.player.power-=.1;
         //    this.updatePowerBar();
         //}
-    };
-    return Level1;
-}(Phaser.State));
+    }
+}
 //# sourceMappingURL=level.js.map
