@@ -35,9 +35,10 @@ class Boss {
         }
     }
     setup() {
-        this.sprite = this.game.add.sprite(this.game.world.centerX - 48, 64, 'boss');
+        //this.sprite = this.game.add.sprite(this.game.world.centerX - 48, 64, 'boss');
+        this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 256, 'boss');
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
-        this.sprite.animations.add('hit', [2, 3, 2, 3, 0], 10, true);
+        this.sprite.animations.add('hit', [4, 5, 6, 7, 4, 5, 6, 7, 0], 10, true);
         this.sprite.animations.play('run');
         this.velocity = 150;
         this.game.physics.arcade.enable(this.sprite);

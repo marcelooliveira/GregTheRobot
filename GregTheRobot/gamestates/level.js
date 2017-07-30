@@ -6,7 +6,7 @@
 /// <reference path="../player/playerbullet.ts" />
 /// <reference path="../player/playerstate.ts" />
 /// <reference path="../phaser/phaser.d.ts" />
-class Level1 extends Phaser.State {
+class BaseLevel extends Phaser.State {
     preload() {
     }
     create() {
@@ -64,9 +64,9 @@ class Level1 extends Phaser.State {
         //  In this case the map is 40x30 tiles in size and the tiles are 32x32 pixels in size.
         var WIDTH_IN_TILES = 16;
         var HEIGHT_IN_TILES = 118;
-        this.layer = this.map.create('level1', WIDTH_IN_TILES, HEIGHT_IN_TILES, 32, 32);
+        this.layer = this.map.create('level' + this.levelNumber, WIDTH_IN_TILES, HEIGHT_IN_TILES, 32, 32);
         //  Populate some tiles for our player to start on
-        var lines = this.readFile("/assets/maps/Map01.txt").split('\n');
+        var lines = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         for (var y = 0; y < lines.length; y++) {
             var line = lines[y];
             var lineArray = new Array(line.length);
@@ -111,7 +111,7 @@ class Level1 extends Phaser.State {
         this.boss.setup();
     }
     setupMapObjects() {
-        var mapAsStringArray = this.readFile("/assets/maps/Map01.txt").split('\n');
+        var mapAsStringArray = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         this.setupExtras(mapAsStringArray);
         this.setupEnemies(mapAsStringArray);
     }
@@ -257,10 +257,12 @@ class Level1 extends Phaser.State {
             }
         }
         this.game.time.events.add(Phaser.Timer.SECOND / 32, this.scroll.bind(this));
-        //while (this.player.power > 0) {
-        //    this.player.power-=.1;
-        //    this.updatePowerBar();
-        //}
+    }
+}
+class Level1 extends BaseLevel {
+    constructor() {
+        super();
+        this.levelNumber = 1;
     }
 }
 //# sourceMappingURL=level.js.map

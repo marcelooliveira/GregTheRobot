@@ -23,6 +23,7 @@ class PlayerBullet {
         this.game.physics.arcade.collide(this.sprite, this.boss.sprite, function () {
             this.sprite.destroy();
             this.level.playerBulletHit(this, this.boss);
+            this.boss.wasHit();
             this.destroyed = false;
         }.bind(this));
         this.level.enemies.forEach(enemy => {
