@@ -1,13 +1,17 @@
 /// <reference path="../app.ts" />
 /// <reference path="playerState.ts" />
 class Player {
-    constructor(level, cursors, layer, bulletSound) {
+    constructor(level, cursors, layer, bulletSound, diedSound) {
         this.level = level;
         this.game = level.game;
         this.cursors = cursors;
         this.layer = layer;
         this.bulletSound = bulletSound;
-        this.power = 100;
+        this.diedSound = diedSound;
+        //this.diedSound.onStop.add(function () {
+        //    this.game.state.start('gameover');
+        //}.bind(this));
+        this.power = 10;
         this.create();
     }
     create() {
@@ -38,8 +42,8 @@ class Player {
         this.state.update(this.cursors, this.game.input.keyboard, this.game.camera);
     }
     setup() {
-        //this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 64, 'player');
-        this.sprite = this.game.add.sprite(this.game.world.centerX - 16, 256, 'player');
+        this.sprite = this.game.add.sprite(this.game.world.centerX - 16, this.game.world.height - 64, 'player');
+        //this.sprite = this.game.add.sprite(this.game.world.centerX - 16, 256, 'player');
         this.sprite.animations.add('run', [0, 1, 2, 3], 4, true);
         this.sprite.animations.add('hit', [4, 5, 6, 7, 4, 5, 6, 7], 10, true);
         this.sprite.animations.add('die', [4, 5, 6, 7, 4, 5, 6, 7], 10, true);
@@ -56,7 +60,6 @@ class Player {
     }
     wasHit() {
         this.sprite.animations.play('hit');
-        //this.state = new PlayerStateDying(this);
         this.power -= 10;
         this.level.updatePowerBar();
     }
@@ -94,6 +97,9 @@ class Player {
             return true;
         }
         else {
+            this.power = 0;
+            this.state = new PlayerStateDying(this);
+            this.diedSound.play();
             return false;
         }
     }

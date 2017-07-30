@@ -1,8 +1,12 @@
-class Menu extends Phaser.State {
+/// <reference path="../phaser/phaser.d.ts" />
+/// <reference path="../phaser/pixi.d.ts" />
+/// <reference path="../phaser/p2.d.ts" />
+/// <reference path="basestate.ts" />
+class Menu extends BaseState {
     create() {
         this.game.add.sprite(0, 0, 'menu');
-        this.addText(11, 4, 'GREG THE ROBOT');
-        this.addText(10, 12, '©KONAMI 1986');
+        //this.addText(11, 4, 'GREG THE ROBOT');
+        this.addText(10, 12, '©CAELUM 2017');
         this.pushSpaceKey = this.addText(9, 16, 'PUSH SPACE KEY');
         this.startSound = this.game.add.audio('start');
         this.startSound.onStop.add(function () {
@@ -15,9 +19,6 @@ class Menu extends Phaser.State {
             this.game.add.tween(this.pushSpaceKey).to({ alpha: 1 }, 100, Phaser.Easing.Linear.None, true, 0, 50, true);
             this.startSound.play();
         }
-    }
-    addText(x, y, text) {
-        return this.game.add.bitmapText(2 * (x * 8) + 2, 2 * (y * 8) + 2, 'konami', text, 13.8);
     }
 }
 //# sourceMappingURL=menu.js.map

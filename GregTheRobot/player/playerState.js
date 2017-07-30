@@ -33,6 +33,9 @@ class PlayerStateDying {
         this.player = player;
     }
     update(cursors, keyboard, camera) {
+        if (this.player.sprite.animations.currentAnim.name != 'die') {
+            this.player.sprite.animations.play('die');
+        }
     }
 }
 //# sourceMappingURL=playerState.js.map

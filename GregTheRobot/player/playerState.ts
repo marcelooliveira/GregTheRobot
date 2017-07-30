@@ -45,6 +45,8 @@ class PlayerStateDying implements IPlayerState {
     }
 
     update(cursors: Phaser.CursorKeys, keyboard: Phaser.Keyboard, camera: Phaser.Camera) {
-
+        if (this.player.sprite.animations.currentAnim.name != 'die') {
+            this.player.sprite.animations.play('die');
+        }
     }
 }

@@ -5,6 +5,7 @@
 /// <reference path="../player/player.ts" />
 /// <reference path="../player/playerbullet.ts" />
 /// <reference path="../player/playerstate.ts" />
+/// <reference path="../phaser/phaser.d.ts" />
 class Level1 extends Phaser.State {
     preload() {
     }
@@ -80,21 +81,23 @@ class Level1 extends Phaser.State {
         this.map.setCollisionByExclusion([0]);
         this.game.camera.y = this.map.height * this.map.tileHeight;
         this.game.time.events.add(Phaser.Timer.SECOND, this.scroll.bind(this));
-        this.game.camera.y = 256;
+        //this.game.camera.y = 256;
     }
     setupAudio() {
         this.volume = .2;
         this.levelMusic = this.game.add.audio('music');
         this.levelMusic.volume = this.volume;
-        this.levelMusic.play(null, null, 1, true);
+        this.levelMusic.play(null, null, .2, true);
         this.playerDeathSound = this.game.add.audio('playerDeath');
         this.playerDeathSound.onStop.add(this.soundStopped.bind(this));
         this.bulletSound = this.game.add.audio('bulletSound');
         this.bulletSound.volume = this.volume;
         this.bulletSound.allowMultiple = true;
+        this.diedSound = this.game.add.audio('diedSound');
+        this.diedSound.volume = this.volume;
     }
     setupPlayer() {
-        this.player = new Player(this, this.cursors, this.layer, this.bulletSound);
+        this.player = new Player(this, this.cursors, this.layer, this.bulletSound, this.diedSound);
         this.player.setup();
         this.updatePowerBar();
     }
@@ -127,15 +130,16 @@ class Level1 extends Phaser.State {
     }
     setupStatusBar() {
         this.powerBar = this.game.add.graphics(0, 0);
-        this.statusBar = this.addText(0, 46.5, 'POWER');
+        this.statusBar = this.addText(0, this.game.camera.y / 16 + 30.25, 'POWER');
     }
     updatePowerBar() {
+        var barPosition = new Phaser.Point(90, this.tileSprite.height - 32);
         this.powerBar.beginFill(0x000000);
         this.powerBar.lineStyle(2, 0x000000, 1);
-        this.powerBar.drawRect(0, 740, 512, 32);
+        this.powerBar.drawRect(0, barPosition.y, 512, 32);
         this.powerBar.endFill();
         this.powerBar.lineStyle(2, 0xffffff, 2);
-        this.powerBar.drawRect(90, 740, 421, 24);
+        this.powerBar.drawRect(barPosition.x, barPosition.y, 421, 24);
         var color;
         if (this.player.power > 75) {
             color = 0x00ff00;
@@ -148,7 +152,7 @@ class Level1 extends Phaser.State {
         }
         this.powerBar.beginFill(color);
         this.powerBar.lineStyle(2, 0xffffff, 0);
-        this.powerBar.drawRect(92, 742, (this.player.power / 100) * 417, 20);
+        this.powerBar.drawRect(barPosition.x + 2, barPosition.y + 2, (this.player.power / 100) * 417, 20);
         this.powerBar.endFill();
     }
     addText(x, y, text) {

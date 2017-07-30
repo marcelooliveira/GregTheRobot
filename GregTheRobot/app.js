@@ -2,6 +2,8 @@
 /// <reference path="enemies/enemy.ts" />
 /// <reference path="gamestates/menu.ts" />
 /// <reference path="gamestates/level.ts" />
+/// <reference path="gamestates/splash.ts" />
+/// <reference path="gamestates/gameOver.ts" />
 /// <reference path="phaser/pixi.d.ts" />
 /// <reference path="phaser/p2.d.ts" />
 /// <reference path="player/player.ts" />
@@ -20,6 +22,7 @@ class GregTheRobot {
         this.game.load.script('baseState', 'gamestates/baseState.js');
         this.game.load.script('menu', 'gamestates/menu.js');
         this.game.load.script('splash01', 'gamestates/splash.js');
+        this.game.load.script('gameOver', 'gamestates/gameOver.js');
         this.game.load.script('level1', 'gamestates/level.js');
         this.game.load.script('player', 'player/player.js');
         this.game.load.script('playerBullet', 'player/playerBullet.js');
@@ -41,18 +44,21 @@ class GregTheRobot {
         this.game.load.spritesheet('enemy10', 'assets/sprites/enemy10.png', 32, 32);
         this.game.load.spritesheet('enemy11', 'assets/sprites/enemy11.png', 32, 32);
         this.game.load.spritesheet('playerBullet', 'assets/sprites/PlayerBullet1SpriteSheet.png', 32, 32);
-        this.game.load.audio('start', ['assets/audio/Start.mp3']);
-        this.game.load.audio('intro', ['assets/audio/Intro.mp3']);
+        this.game.load.audio('start', ['assets/audio/see-leprechau.wav']);
+        this.game.load.audio('intro', ['assets/audio/fight-boss-1.wav']);
         this.game.load.audio('music', ['assets/audio/run-out-of-the-city.wav']);
-        this.game.load.audio('playerDeath', ['assets/audio/Death.mp3']);
-        this.game.load.audio('bulletSound', ['assets/audio/PlayerBullet1Shooting.wav']);
+        this.game.load.audio('playerDeath', ['assets/audio/died.wav']);
+        this.game.load.audio('bulletSound', ['assets/audio/canon-1.wav']);
+        this.game.load.audio('died', ['assets/audio/died.wav']);
+        this.game.load.audio('gameOver', ['assets/audio/died.wav']);
         this.game.load.bitmapFont('konami', 'assets/fonts/konami_0.png', 'assets/fonts/konami.xml');
     }
     create() {
         this.game.state.add('menu', Menu);
         this.game.state.add('splash01', Splash01);
         this.game.state.add('level1', Level1);
-        this.game.state.start('level1');
+        this.game.state.add('gameover', GameOver);
+        this.game.state.start('menu');
     }
     update() {
     }

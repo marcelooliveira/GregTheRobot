@@ -56,9 +56,10 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="assets\audio\Bonus.mp3" />
-    <Content Include="assets\audio\BossTheme.mp3" />
-    <Content Include="assets\audio\BulletShooting.wav" />
+    <Content Include="assets\audio\canon-1.wav" />
+    <Content Include="assets\audio\damage.wav" />
+    <Content Include="assets\audio\died.wav" />
+    <Content Include="assets\audio\energy.wav" />
     <Content Include="assets\audio\fight-boss-1.wav" />
     <Content Include="assets\audio\fight-boss-2.wav" />
     <Content Include="assets\audio\fight-boss-3.wav" />
@@ -67,26 +68,8 @@
     <Content Include="assets\audio\run-out-of-the-city.wav" />
     <Content Include="assets\audio\see-boss.wav" />
     <Content Include="assets\audio\see-leprechau.wav" />
-    <Content Include="assets\audio\Start.mp3" />
-    <Content Include="assets\audio\Death.mp3" />
-    <Content Include="assets\audio\FinishLevel.mp3" />
-    <Content Include="assets\audio\Fire.mp3" />
-    <Content Include="assets\audio\GameOver.mp3" />
-    <Content Include="assets\audio\Intro.mp3" />
-    <Content Include="assets\audio\Knightmare MSX Theme.mp3" />
-    <Content Include="assets\audio\Level1.mp3" />
-    <Content Include="assets\audio\Level2.mp3" />
-    <Content Include="assets\audio\pause.mp3" />
-    <Content Include="assets\audio\PlayerBullet1Shooting.wav" />
-    <Content Include="assets\audio\PlayerBullet2Shooting.wav" />
-    <Content Include="assets\audio\PlayerBullet4Shooting.wav" />
-    <Content Include="assets\audio\PlayerBullet5Shooting.wav" />
-    <Content Include="assets\audio\PlayerBullet6Shooting.wav" />
-    <Content Include="assets\audio\PowerUp.wav" />
-    <Content Include="assets\audio\TheEnd.mp3" />
-    <Content Include="assets\audio\unpause.mp3" />
+    <Content Include="assets\audio\socoban.wav" />
     <Content Include="assets\audio\walk-to-find-leprechau.wav" />
-    <Content Include="assets\audio\Weapon.wav" />
     <Content Include="assets\backgrounds\menu.png" />
     <Content Include="assets\backgrounds\splash01.png" />
     <Content Include="assets\fonts\konami.xml" />
@@ -132,6 +115,7 @@
     <Content Include="assets\sprites\PlayerDestructionSpriteSheet.png" />
     <Content Include="index.html" />
     <TypeScriptCompile Include="gamestates\baseState.ts" />
+    <TypeScriptCompile Include="gamestates\gameOver.ts" />
     <TypeScriptCompile Include="gamestates\splash.ts" />
     <TypeScriptCompile Include="gamestates\menu.ts" />
     <Content Include="phaser\phaser2.png" />
