@@ -81,10 +81,12 @@
     <Content Include="assets\audio\start-level.wav" />
     <Content Include="assets\audio\walk-to-find-leprechau.wav" />
     <Content Include="assets\backgrounds\level02.jpg" />
+    <Content Include="assets\backgrounds\level03.jpg" />
     <Content Include="assets\backgrounds\menu.png" />
     <Content Include="assets\backgrounds\splash1.png" />
     <Content Include="assets\fonts\bitmapfont.xml" />
     <Content Include="assets\fonts\bitmapfont_0.png" />
+    <Content Include="assets\maps\Map03.txt" />
     <Content Include="assets\maps\Map02.txt" />
     <Content Include="assets\maps\Map01.txt" />
     <Content Include="assets\sprites\boss3.png" />
@@ -119,6 +121,7 @@
     <Content Include="index.html" />
     <TypeScriptCompile Include="extras\battery.ts" />
     <TypeScriptCompile Include="gamestates\baseState.ts" />
+    <TypeScriptCompile Include="gamestates\theEnd.ts" />
     <TypeScriptCompile Include="gamestates\gameOver.ts" />
     <TypeScriptCompile Include="gamestates\splash.ts" />
     <TypeScriptCompile Include="gamestates\menu.ts" />

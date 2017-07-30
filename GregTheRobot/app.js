@@ -23,7 +23,8 @@ class GregTheRobot {
         this.game.load.script('menu', 'gamestates/menu.js');
         this.game.load.script('splash1', 'gamestates/splash.js');
         this.game.load.script('gameOver', 'gamestates/gameOver.js');
-        this.game.load.script('level1', 'gamestates/level.js');
+        this.game.load.script('level', 'gamestates/level.js');
+        this.game.load.script('theEnd', 'gamestates/theEnd.js');
         this.game.load.script('player', 'player/player.js');
         this.game.load.script('playerBullet', 'player/playerBullet.js');
         this.game.load.script('playerState', 'player/playerState.js');
@@ -32,6 +33,7 @@ class GregTheRobot {
         this.game.load.script('battery', 'extras/battery.js');
         this.game.load.image('level1', 'assets/backgrounds/level01.jpg');
         this.game.load.image('level2', 'assets/backgrounds/level02.jpg');
+        this.game.load.image('level3', 'assets/backgrounds/level03.jpg');
         this.game.load.spritesheet('player', 'assets/sprites/player.png', 32, 32);
         this.game.load.spritesheet('battery', 'assets/sprites/battery.png', 32, 32);
         this.game.load.spritesheet('boss1', 'assets/sprites/boss1.png', 96, 96);
@@ -70,6 +72,7 @@ class GregTheRobot {
         this.game.state.add('splash3', Splash3);
         this.game.state.add('level3', Level3);
         this.game.state.add('gameover', GameOver);
+        this.game.state.add('theend', TheEnd);
         this.game.state.start('menu');
     }
     update() {

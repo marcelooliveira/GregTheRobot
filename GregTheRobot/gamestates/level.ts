@@ -152,13 +152,7 @@ abstract class BaseLevel extends Phaser.State {
 
         this.bossDeathSound = this.game.add.audio('bossDeath');
         this.bossDeathSound.volume = this.volume;
-        this.bossDeathSound.onStop.add(function () {
-            this.levelMusic.stop();
-            this.bulletSound.stop();
-            this.bulletSound.volume = 0;
-
-            this.game.state.start('splash' + (this.levelNumber + 1));
-        }.bind(this));
+        this.bossDeathSound.onStop.add(this.goNextLevel.bind(this));
     }
 
     setupPlayer(): void {
@@ -347,6 +341,21 @@ abstract class BaseLevel extends Phaser.State {
             }
         }
         this.game.time.events.add(Phaser.Timer.SECOND / 32, this.scroll.bind(this));
+    }
+
+    goNextLevel() {
+        this.levelMusic.stop();
+        this.bulletSound.stop();
+        this.bulletSound.volume = 0;
+
+        var nextStateName: string;
+        if (this.levelNumber + 1 <= 3) {
+            nextStateName = 'splash' + (this.levelNumber + 1);
+        }
+        else {
+            nextStateName = 'theend';
+        }
+        this.game.state.start(nextStateName);
     }
 }
 
