@@ -18,7 +18,7 @@
         this.layer = layer;
         this.bulletSound = bulletSound;
         this.player = player;
-        this.power = 50;
+        this.power = 100;
         this.create();
     }
 
