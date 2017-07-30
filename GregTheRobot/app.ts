@@ -55,8 +55,9 @@ class GregTheRobot {
         this.game.load.audio('start', ['assets/audio/see-leprechau.wav']);
         this.game.load.audio('intro', ['assets/audio/fight-boss-1.wav']);
         this.game.load.audio('music', ['assets/audio/run-out-of-the-city.wav']);
-        this.game.load.audio('playerDeath', ['assets/audio/died.wav']);
+        this.game.load.audio('playerDeath', ['assets/audio/fight-boss-3.wav']);
         this.game.load.audio('bulletSound', ['assets/audio/canon-1.wav']);
+        this.game.load.audio('damage', ['assets/audio/canon-1.wav']);
         this.game.load.audio('died', ['assets/audio/died.wav']);
         this.game.load.audio('gameOver', ['assets/audio/died.wav']);
 
@@ -68,7 +69,7 @@ class GregTheRobot {
         this.game.state.add('splash01', Splash01);
         this.game.state.add('level1', Level1);
         this.game.state.add('gameover', GameOver);
-        this.game.state.start('menu');
+        this.game.state.start('level1');
     }
 
 

@@ -35,6 +35,7 @@ class Enemy {
         if (this.sprite.inCamera) {
             this.sprite.body.velocity.y = this.velocity;
         }
+
         this.game.physics.arcade.collide(this.sprite, this.player.sprite, function () {
             this.level.playerWasHit(this);
             this.sprite.destroy();

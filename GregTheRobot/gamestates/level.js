@@ -89,15 +89,17 @@ class Level1 extends Phaser.State {
         this.levelMusic.volume = this.volume;
         this.levelMusic.play(null, null, .2, true);
         this.playerDeathSound = this.game.add.audio('playerDeath');
-        this.playerDeathSound.onStop.add(this.soundStopped.bind(this));
-        this.bulletSound = this.game.add.audio('bulletSound');
+        this.playerDeathSound.onStop.add(this.playerDeathSoundStopped.bind(this));
+        this.bulletSound = this.game.add.audio('bulletSound', 1, false);
         this.bulletSound.volume = this.volume;
         this.bulletSound.allowMultiple = true;
-        this.diedSound = this.game.add.audio('diedSound');
+        this.diedSound = this.game.add.audio('died');
         this.diedSound.volume = this.volume;
+        this.damageSound = this.game.add.audio('damage');
+        this.damageSound.volume = this.volume;
     }
     setupPlayer() {
-        this.player = new Player(this, this.cursors, this.layer, this.bulletSound, this.diedSound);
+        this.player = new Player(this, this.cursors, this.layer, this.bulletSound, this.diedSound, this.damageSound);
         this.player.setup();
         this.updatePowerBar();
     }
@@ -166,6 +168,14 @@ class Level1 extends Phaser.State {
             this.updatePowerBar();
         }
     }
+    playerStateChanged(newState) {
+        if (newState instanceof PlayerStateDying) {
+            this.levelMusic.stop();
+            this.bulletSound.stop();
+            this.bulletSound.volume = 0;
+            this.playerDeathSound.play();
+        }
+    }
     playerBulletHit(playerBullet, target) {
         this.playerBullets.forEach((b, i) => {
             if (b == playerBullet) {
@@ -187,11 +197,7 @@ class Level1 extends Phaser.State {
         return 1;
     }
     playerWasHit(enemy) {
-        if (this.player.sprite.animations.currentAnim.name == 'run') {
-            //this.levelMusic.stop();
-            //this.playerDeathSound.play();
-            this.player.wasHit();
-        }
+        this.player.wasHit();
         this.enemies.forEach((e, i) => {
             if (e === enemy) {
                 this.enemies.splice(i, 1);
@@ -199,10 +205,8 @@ class Level1 extends Phaser.State {
             }
         });
     }
-    soundStopped(sound) {
-        if (sound.name == 'playerDeath') {
-            this.game.state.start('splash01');
-        }
+    playerDeathSoundStopped(sound) {
+        this.game.state.start('gameover');
     }
     scroll() {
         this.game.camera.y -= this.getScrollStep();

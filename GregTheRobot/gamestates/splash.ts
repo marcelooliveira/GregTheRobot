@@ -1,4 +1,4 @@
-﻿class Splash01 extends Phaser.State {
+﻿class Splash01 extends BaseState {
     introSound: Phaser.Sound;
     static firstTime: boolean;
     constructor() {
@@ -7,7 +7,9 @@
     }
 
     create() {
-        this.game.add.sprite(0, 0, 'splash01');
+        this.addText(12, 11, ' LEVEL 1');
+        this.addText(12, 13, 'THE TYRANT');
+
         if (Splash01.firstTime) {
             Splash01.firstTime = false;
             this.introSound = this.game.add.audio('intro');

@@ -23,6 +23,7 @@ class Player implements IPlayer {
     layer: Phaser.TilemapLayer;
     bulletSound: Phaser.Sound;
     diedSound: Phaser.Sound;
+    damageSound: Phaser.Sound;
     sprite: Phaser.Sprite;
     isWeaponLoaded: boolean;
     velocity: number;
@@ -31,16 +32,18 @@ class Player implements IPlayer {
     power: number;
     constructor(
         level: Level1, cursors: Phaser.CursorKeys,
-        layer: Phaser.TilemapLayer, bulletSound: Phaser.Sound, diedSound: Phaser.Sound) {
+        layer: Phaser.TilemapLayer, bulletSound: Phaser.Sound,
+        diedSound: Phaser.Sound, damageSound: Phaser.Sound) {
         this.level = level;
         this.game = level.game;
         this.cursors = cursors;
         this.layer = layer;
         this.bulletSound = bulletSound;
         this.diedSound = diedSound;
-        //this.diedSound.onStop.add(function () {
-        //    this.game.state.start('gameover');
-        //}.bind(this));
+        this.damageSound = damageSound;
+        this.damageSound.onStop.add(function () {
+            this.sprite.animations.play('run');
+        }.bind(this));
         this.power = 10;
         this.create();
     }
@@ -99,9 +102,9 @@ class Player implements IPlayer {
     }
     
     wasHit() {
+        this.damageSound.play();
         this.sprite.animations.play('hit');
-        this.power -= 10;
-        this.level.updatePowerBar();
+        this.decreasePower(1);
     }
 
     resurrect() {
@@ -120,18 +123,22 @@ class Player implements IPlayer {
 
     runUp() {
         this.sprite.body.velocity.y = -this.velocity;
+        //this.decreasePower(1);
     }
 
     runDown() {
         this.sprite.body.velocity.y = this.velocity;
+        //this.decreasePower(1);
     }
 
     runLeft() {
         this.sprite.body.velocity.x = -this.velocity;
+        //this.decreasePower(1);
     }
 
     runRight() {
         this.sprite.body.velocity.x = this.velocity;
+        //this.decreasePower(1);
     }
 
     shoot() {
@@ -142,12 +149,15 @@ class Player implements IPlayer {
     decreasePower(energyAmount: number): boolean {
         if (this.power - energyAmount > 0) {
             this.power -= energyAmount;
+            this.level.updatePowerBar();
             return true;
         }
         else {
             this.power = 0;
+            this.level.updatePowerBar();
             this.state = new PlayerStateDying(this);
             this.diedSound.play();
+            this.level.playerStateChanged(this.state);
             return false;
         }
     }
