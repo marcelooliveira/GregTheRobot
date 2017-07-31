@@ -67,7 +67,7 @@ class BaseLevel extends Phaser.State {
         var HEIGHT_IN_TILES = 118;
         this.layer = this.map.create('level' + this.levelNumber, WIDTH_IN_TILES, HEIGHT_IN_TILES, 32, 32);
         //  Populate some tiles for our player to start on
-        var lines = this.readFile("GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        var lines = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         for (var y = 0; y < lines.length; y++) {
             var line = lines[y];
             var lineArray = new Array(line.length);
@@ -116,7 +116,7 @@ class BaseLevel extends Phaser.State {
         this.boss.setup();
     }
     setupMapObjects() {
-        var mapAsStringArray = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        var mapAsStringArray = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         this.setupExtras(mapAsStringArray);
         this.setupEnemies(mapAsStringArray);
     }
