@@ -51,6 +51,7 @@ abstract class BaseLevel extends Phaser.State {
         this.boss.update();
         this.enemies.forEach(enemy => {
             enemy.update();
+            enemy.checkEnemyCollisions(this.enemies);
         });
         this.extras.forEach(extra => {
             extra.update();
@@ -207,21 +208,22 @@ abstract class BaseLevel extends Phaser.State {
                 var indexOf = enemycodes.indexOf(char);
                 if (indexOf >= 0) {
                     var enemy: BaseEnemy;
+                    var id: number = this.enemies.length + 1;
                     switch (indexOf) {
                         case 0:
-                            enemy = new EnemyA(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            enemy = new EnemyA(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1, id);
                             break;
                         case 1:
-                            enemy = new EnemyB(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            enemy = new EnemyB(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1, id);
                             break;
                         case 2:
-                            enemy = new EnemyC(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            enemy = new EnemyC(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1, id);
                             break;
                         case 3:
-                            enemy = new EnemyD(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            enemy = new EnemyD(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1, id);
                             break;
                         case 4:
-                            enemy = new EnemyE(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            enemy = new EnemyE(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1, id);
                             break;
                     }
                     enemy.setup();

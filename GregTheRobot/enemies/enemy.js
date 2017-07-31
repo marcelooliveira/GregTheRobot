@@ -1,6 +1,6 @@
 /// <reference path="../app.ts" />
 class BaseEnemy {
-    constructor(level, game, layer, bulletSound, player, x, y, enemyNumber) {
+    constructor(level, game, layer, bulletSound, player, x, y, enemyNumber, id) {
         this.level = level;
         this.game = game;
         this.layer = layer;
@@ -10,6 +10,7 @@ class BaseEnemy {
         this.x = x;
         this.y = y;
         this.enemyNumber = enemyNumber;
+        this.id = id;
         this.velocity = 16;
     }
     create() {
@@ -17,11 +18,19 @@ class BaseEnemy {
     }
     update() {
     }
-    checkCollisions() {
+    checkPlayerCollisions() {
         this.game.physics.arcade.collide(this.sprite, this.player.sprite, function () {
             this.level.playerWasHit(this);
             this.sprite.destroy();
         }.bind(this));
+    }
+    checkEnemyCollisions(enemies) {
+        enemies.forEach(other => {
+            if (this.id != other.id) {
+                this.game.physics.arcade.collide(this.sprite, other.sprite, function () {
+                }.bind(this));
+            }
+        });
     }
     setup() {
         this.sprite = this.game.add.sprite(this.x, this.y, 'enemy' + this.enemyNumber);
@@ -42,17 +51,24 @@ class EnemyA extends BaseEnemy {
             this.sprite.body.velocity.x = this.velocity
                 * ((this.game.time.totalElapsedSeconds() % 2) - 1);
         }
-        super.checkCollisions();
+        super.checkPlayerCollisions();
     }
 }
 class EnemyB extends BaseEnemy {
     update() {
         super.update();
         if (this.sprite.inCamera) {
-            this.sprite.body.velocity.x = this.velocity
-                * ((this.game.time.totalElapsedSeconds() % 2) - 1);
+            var direction;
+            if (this.sprite.body.position.x > this.player.sprite.body.position.x) {
+                direction = -1;
+            }
+            else {
+                direction = 1;
+            }
+            this.sprite.body.velocity.x = direction * this.velocity
+                * (this.game.time.totalElapsedSeconds() % 4);
         }
-        super.checkCollisions();
+        super.checkPlayerCollisions();
     }
 }
 class EnemyC extends BaseEnemy {
@@ -62,7 +78,7 @@ class EnemyC extends BaseEnemy {
             this.sprite.body.velocity.x = this.velocity
                 * ((this.game.time.totalElapsedSeconds() % 4) - 2);
         }
-        super.checkCollisions();
+        super.checkPlayerCollisions();
     }
 }
 class EnemyD extends BaseEnemy {
@@ -73,7 +89,7 @@ class EnemyD extends BaseEnemy {
             this.sprite.body.velocity.x = this.velocity
                 * ((this.game.time.totalElapsedSeconds() % 4) - 2);
         }
-        super.checkCollisions();
+        super.checkPlayerCollisions();
     }
 }
 class EnemyE extends BaseEnemy {
@@ -82,7 +98,7 @@ class EnemyE extends BaseEnemy {
         if (this.sprite.inCamera) {
             this.sprite.body.velocity.y = this.velocity * 2;
         }
-        super.checkCollisions();
+        super.checkPlayerCollisions();
     }
 }
 //# sourceMappingURL=enemy.js.map

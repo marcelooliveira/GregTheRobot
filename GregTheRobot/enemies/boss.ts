@@ -35,6 +35,10 @@
         //    + ', ' + parseInt(this.sprite.position.y.toString())
         //    , 32, 32);
 
+        if (this.velocityY > 0 && this.sprite.body.position.y > 512) {
+            this.velocityY = -this.velocity;
+        }
+
         this.game.physics.arcade.collide(this.sprite, this.layer, function () {
             if (this.velocityX > 0) {
                 this.velocityX = 0;
