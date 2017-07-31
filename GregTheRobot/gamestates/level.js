@@ -116,7 +116,7 @@ class BaseLevel extends Phaser.State {
         this.boss.setup();
     }
     setupMapObjects() {
-        var mapAsStringArray = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        var mapAsStringArray = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         this.setupExtras(mapAsStringArray);
         this.setupEnemies(mapAsStringArray);
     }
