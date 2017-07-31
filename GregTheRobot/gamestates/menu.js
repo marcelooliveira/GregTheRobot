@@ -6,7 +6,7 @@ class Menu extends BaseState {
     create() {
         this.game.add.sprite(0, 0, 'menu');
         //this.addText(11, 4, 'GREG THE ROBOT');
-        this.addText(10, 12, '©CAELUM 2017');
+        this.addText(10, 12, '© CAELUM 2017');
         this.pushSpaceKey = this.addText(9, 16, 'PUSH SPACE KEY');
         this.startSound = this.game.add.audio('start');
         this.startSound.onStop.add(function () {
