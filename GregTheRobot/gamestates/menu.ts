@@ -18,7 +18,7 @@ class Menu extends BaseState {
             this.game.state.start('splash1');
         }.bind(this));
     }
-
+    
     update() {
         if (this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
             this.pushSpaceKey.alpha = 0;
