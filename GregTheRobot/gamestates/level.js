@@ -68,6 +68,7 @@ class BaseLevel extends Phaser.State {
         this.layer = this.map.create('level' + this.levelNumber, WIDTH_IN_TILES, HEIGHT_IN_TILES, 32, 32);
         //  Populate some tiles for our player to start on
         var lines = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        alert(lines);
         for (var y = 0; y < lines.length; y++) {
             var line = lines[y];
             var lineArray = new Array(line.length);
