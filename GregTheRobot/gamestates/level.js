@@ -144,14 +144,31 @@ class BaseLevel extends Phaser.State {
     }
     setupEnemies(mapAsStringArray) {
         this.enemies = [];
-        var enemycodes = 'abcdefghijklmnop';
+        var enemycodes = 'abcde';
         for (var y = 0; y < mapAsStringArray.length; y++) {
             var line = mapAsStringArray[y];
             for (var x = 0; x < line.length; x++) {
                 var char = line[x];
                 var indexOf = enemycodes.indexOf(char);
                 if (indexOf >= 0) {
-                    var enemy = new Enemy(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                    var enemy;
+                    switch (indexOf) {
+                        case 0:
+                            enemy = new EnemyA(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            break;
+                        case 1:
+                            enemy = new EnemyB(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            break;
+                        case 2:
+                            enemy = new EnemyC(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            break;
+                        case 3:
+                            enemy = new EnemyD(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            break;
+                        case 4:
+                            enemy = new EnemyE(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1);
+                            break;
+                    }
                     enemy.setup();
                     this.enemies.push(enemy);
                 }

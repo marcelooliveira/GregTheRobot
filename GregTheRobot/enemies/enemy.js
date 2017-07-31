@@ -1,5 +1,5 @@
 /// <reference path="../app.ts" />
-class Enemy {
+class BaseEnemy {
     constructor(level, game, layer, bulletSound, player, x, y, enemyNumber) {
         this.level = level;
         this.game = game;
@@ -16,9 +16,8 @@ class Enemy {
         this.isWeaponLoaded = true;
     }
     update() {
-        if (this.sprite.inCamera) {
-            this.sprite.body.velocity.y = this.velocity;
-        }
+    }
+    checkCollisions() {
         this.game.physics.arcade.collide(this.sprite, this.player.sprite, function () {
             this.level.playerWasHit(this);
             this.sprite.destroy();
@@ -33,6 +32,57 @@ class Enemy {
         this.sprite.body.setSize(32, 32, 0, 0);
     }
     wasHit() {
+    }
+}
+class EnemyA extends BaseEnemy {
+    update() {
+        super.update();
+        if (this.sprite.inCamera) {
+            this.sprite.body.velocity.y = this.velocity;
+            this.sprite.body.velocity.x = this.velocity
+                * ((this.game.time.totalElapsedSeconds() % 2) - 1);
+        }
+        super.checkCollisions();
+    }
+}
+class EnemyB extends BaseEnemy {
+    update() {
+        super.update();
+        if (this.sprite.inCamera) {
+            this.sprite.body.velocity.x = this.velocity
+                * ((this.game.time.totalElapsedSeconds() % 2) - 1);
+        }
+        super.checkCollisions();
+    }
+}
+class EnemyC extends BaseEnemy {
+    update() {
+        super.update();
+        if (this.sprite.inCamera) {
+            this.sprite.body.velocity.x = this.velocity
+                * ((this.game.time.totalElapsedSeconds() % 4) - 2);
+        }
+        super.checkCollisions();
+    }
+}
+class EnemyD extends BaseEnemy {
+    update() {
+        super.update();
+        if (this.sprite.inCamera) {
+            this.sprite.body.velocity.y = this.velocity;
+            this.sprite.body.velocity.x = this.velocity
+                * ((this.game.time.totalElapsedSeconds() % 4) - 2);
+        }
+        super.checkCollisions();
+    }
+}
+class EnemyE extends BaseEnemy {
+    update() {
+        super.update();
+        if (this.sprite.inCamera) {
+            this.sprite.body.velocity.y = this.velocity * 2;
+        }
+        super.checkCollisions();
     }
 }
 //# sourceMappingURL=enemy.js.map
