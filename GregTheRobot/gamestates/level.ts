@@ -106,7 +106,7 @@ abstract class BaseLevel extends Phaser.State {
 
         //  Populate some tiles for our player to start on
 
-        var lines = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        var lines = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         for (var y = 0; y < lines.length; y++) {
             var line = lines[y];
             var lineArray = new Array(line.length);
@@ -168,7 +168,7 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     setupMapObjects() {
-        var mapAsStringArray = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        var mapAsStringArray = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         this.setupExtras(mapAsStringArray);
         this.setupEnemies(mapAsStringArray);
     }
