@@ -49,7 +49,7 @@ abstract class BaseEnemy {
             if (this.id != other.id) {
                 this.game.physics.arcade.collide(this.sprite, other.sprite, function () {
 
-                }.bind(this));
+                }.bind(this));  
             }
         });
 
