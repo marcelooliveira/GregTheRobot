@@ -23,7 +23,7 @@ class Player {
     update() {
         this.game.physics.arcade.collide(this.sprite, this.layer);
         this.sprite.body.velocity.set(0);
-        var currentFrameindex = this.sprite.animations.currentFrame.index;
+        let currentFrameindex = this.sprite.animations.currentFrame.index;
         switch (currentFrameindex) {
             case 0:
                 this.sprite.rotation = -.1;
@@ -74,12 +74,15 @@ class Player {
         this.state = new PlayerStateRunning(this);
     }
     walk() {
-        if (!this.cursors.down.isDown
-            && !this.cursors.up.isDown
-            && !this.cursors.left.isDown
-            && !this.cursors.right.isDown) {
+        if (this.noCursorKeyDown()) {
             this.sprite.body.velocity.y = -this.walkingVelocity;
         }
+    }
+    noCursorKeyDown() {
+        return !this.cursors.down.isDown
+            && !this.cursors.up.isDown
+            && !this.cursors.left.isDown
+            && !this.cursors.right.isDown;
     }
     runUp() {
         this.sprite.body.velocity.y = -this.velocity;

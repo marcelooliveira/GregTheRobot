@@ -54,10 +54,10 @@
             }.bind(this));
         });
 
-        if (this.sprite.animations.currentFrame) {
-            var currentFrameindex = this.sprite.animations.currentFrame.index;
-            this.sprite.rotation = currentFrameindex * Math.PI / 4;
-        }
+        //if (this.sprite.animations.currentFrame) {
+        //    var currentFrameindex = this.sprite.animations.currentFrame.index;
+        //    this.sprite.rotation = currentFrameindex * Math.PI / 4;
+        //}
 
     }
 

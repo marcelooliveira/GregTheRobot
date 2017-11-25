@@ -34,10 +34,10 @@ class PlayerBullet {
                 enemy.sprite.destroy();
             }.bind(this));
         });
-        if (this.sprite.animations.currentFrame) {
-            var currentFrameindex = this.sprite.animations.currentFrame.index;
-            this.sprite.rotation = currentFrameindex * Math.PI / 4;
-        }
+        //if (this.sprite.animations.currentFrame) {
+        //    var currentFrameindex = this.sprite.animations.currentFrame.index;
+        //    this.sprite.rotation = currentFrameindex * Math.PI / 4;
+        //}
     }
     setup() {
         this.sprite = this.game.add.sprite(this.player.sprite.position.x, this.player.sprite.position.y - 32, 'playerBullet');

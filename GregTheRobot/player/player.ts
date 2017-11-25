@@ -62,7 +62,7 @@ class Player implements IPlayer {
 
         this.sprite.body.velocity.set(0);
 
-        var currentFrameindex = this.sprite.animations.currentFrame.index;
+        let currentFrameindex : number = this.sprite.animations.currentFrame.index;
         switch (currentFrameindex) {
             case 0:
                 this.sprite.rotation = -.1;
@@ -121,12 +121,16 @@ class Player implements IPlayer {
     }
 
     walk() {
-        if (!this.cursors.down.isDown
-            && !this.cursors.up.isDown
-            && !this.cursors.left.isDown
-            && !this.cursors.right.isDown) {
+        if (this.noCursorKeyDown()) {
             this.sprite.body.velocity.y = - this.walkingVelocity;
         }
+    }
+
+    noCursorKeyDown(): boolean {
+        return !this.cursors.down.isDown
+            && !this.cursors.up.isDown
+            && !this.cursors.left.isDown
+            && !this.cursors.right.isDown;
     }
 
     runUp() {

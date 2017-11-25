@@ -85,7 +85,7 @@ class EnemyB extends BaseEnemy {
         super.update();
 
         if (this.sprite.inCamera) {
-            var direction: number;
+            let direction: number;
 
             if (this.sprite.body.position.x > this.player.sprite.body.position.x)
             {

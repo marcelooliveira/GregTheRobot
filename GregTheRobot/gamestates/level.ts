@@ -65,10 +65,10 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     readFile(file: string) : string {
-        var request = new XMLHttpRequest();
+        let request: XMLHttpRequest = new XMLHttpRequest();
         request.open("GET", file, false);
         request.send(null);
-        var returnValue = request.responseText;
+        let returnValue : string = request.responseText;
 
         return returnValue;
     }
@@ -84,12 +84,12 @@ abstract class BaseLevel extends Phaser.State {
         //  but you could generate anything here
         this.bmd = this.game.make.bitmapData(32 * 25, 32 * 2);
 
-        var colors = Phaser.Color.HSVColorWheel();
+        let colors = Phaser.Color.HSVColorWheel();
 
-        var i = 0;
+        let i : number = 0;
 
-        for (var y = 0; y < 2; y++) {
-            for (var x = 0; x < 25; x++) {
+        for (let y = 0; y < 2; y++) {
+            for (let x = 0; x < 25; x++) {
                 //this.bmd.rect(x * 32, y * 32, 32, 32, colors[i].rgba);
                 i += 6;
             }
@@ -100,18 +100,18 @@ abstract class BaseLevel extends Phaser.State {
 
         //  Creates a new blank layer and sets the map dimensions.
         //  In this case the map is 40x30 tiles in size and the tiles are 32x32 pixels in size.
-        var WIDTH_IN_TILES = 16;
-        var HEIGHT_IN_TILES = 118;
+        const WIDTH_IN_TILES : number = 16;
+        const HEIGHT_IN_TILES : number = 118;
         this.layer = this.map.create('level' + this.levelNumber, WIDTH_IN_TILES, HEIGHT_IN_TILES, 32, 32);
 
         //  Populate some tiles for our player to start on
 
-        var lines = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
-        for (var y = 0; y < lines.length; y++) {
-            var line = lines[y];
-            var lineArray = new Array(line.length);
-            for (var x = 0; x < line.length; x++) {
-                var char = line[x];
+        let lines : string[] = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        for (let y = 0; y < lines.length; y++) {
+            let line : string = lines[y];
+            let lineArray : number[] = new Array(line.length);
+            for (let x = 0; x < line.length; x++) {
+                let char : string = line[x];
                 if (char == 'X') {
                     this.map.putTile(1, x, y, this.layer);
                     lineArray[x] = 1;
@@ -168,21 +168,21 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     setupMapObjects() {
-        var mapAsStringArray = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
-        this.setupExtras(mapAsStringArray);
-        this.setupEnemies(mapAsStringArray);
+        let map : string[] = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        this.setupExtras(map);
+        this.setupEnemies(map);
     }
 
     setupExtras(mapAsStringArray: string[]) {
         this.extras = [];
-        var extracodes = 'A';
-        for (var y = 0; y < mapAsStringArray.length; y++) {
-            var line = mapAsStringArray[y];
-            for (var x = 0; x < line.length; x++) {
-                var char = line[x];
-                var indexOf = extracodes.indexOf(char);
+        let extracodes : string = 'A';
+        for (let y = 0; y < mapAsStringArray.length; y++) {
+            let line : string = mapAsStringArray[y];
+            for (let x = 0; x < line.length; x++) {
+                let char : string = line[x];
+                let indexOf : number = extracodes.indexOf(char);
                 if (indexOf >= 0) {
-                    var extra: Battery;
+                    let extra: Battery;
 
                     switch (char) {
                         case 'A':
@@ -200,15 +200,15 @@ abstract class BaseLevel extends Phaser.State {
 
     setupEnemies(mapAsStringArray: string[]) {
         this.enemies = [];
-        var enemycodes = 'abcde';
-        for (var y = 0; y < mapAsStringArray.length; y++) {
-            var line = mapAsStringArray[y];
-            for (var x = 0; x < line.length; x++) {
-                var char = line[x];
-                var indexOf = enemycodes.indexOf(char);
+        let enemycodes : string = 'abcde';
+        for (let y = 0; y < mapAsStringArray.length; y++) {
+            let line : string = mapAsStringArray[y];
+            for (let x = 0; x < line.length; x++) {
+                let char : string = line[x];
+                let indexOf : number = enemycodes.indexOf(char);
                 if (indexOf >= 0) {
-                    var enemy: BaseEnemy;
-                    var id: number = this.enemies.length + 1;
+                    let enemy: BaseEnemy;
+                    let id: number = this.enemies.length + 1;
                     switch (indexOf) {
                         case 0:
                             enemy = new EnemyA(this, this.game, this.layer, this.bulletSound, this.player, x * 32, y * 32, indexOf + 1, id);
@@ -247,7 +247,7 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     updatePowerBar() {
-        var barPosition
+        let barPosition: Phaser.Point
             = new Phaser.Point(90, this.tileSprite.height - 32);
 
         this.powerBar.beginFill(0x000000);
@@ -257,7 +257,7 @@ abstract class BaseLevel extends Phaser.State {
         this.powerBar.lineStyle(2, 0xffffff, 2);
         this.powerBar.drawRect(barPosition.x, barPosition.y, 421, 24);
 
-        var color: number;
+        let color: number;
         if (this.player.power > 75) {
             color = 0x00ff00;
         }
@@ -278,7 +278,7 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     firePlayerBullet() {
-        var playerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
+        let playerBullet: PlayerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
         playerBullet.setup();
         this.playerBullets.push(playerBullet);
         if (this.player.decreasePower(1)) {
@@ -372,7 +372,7 @@ abstract class BaseLevel extends Phaser.State {
         this.bulletSound.stop();
         this.bulletSound.volume = 0;
 
-        var nextStateName: string;
+        let nextStateName: string;
         if (this.levelNumber + 1 <= 3) {
             nextStateName = 'splash' + (this.levelNumber + 1);
         }
