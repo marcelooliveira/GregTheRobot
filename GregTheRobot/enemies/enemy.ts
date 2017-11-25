@@ -52,7 +52,6 @@ abstract class BaseEnemy {
                 }.bind(this));  
             }
         });
-
     }
 
     setup() {

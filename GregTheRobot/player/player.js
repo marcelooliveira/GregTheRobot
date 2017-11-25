@@ -67,7 +67,6 @@ class Player {
     }
     recharged(charge) {
         this.rechargeSound.play();
-        //this.sprite.animations.play('hit');
         this.increasePower(charge);
     }
     resurrect() {
@@ -84,19 +83,15 @@ class Player {
     }
     runUp() {
         this.sprite.body.velocity.y = -this.velocity;
-        //this.decreasePower(1);
     }
     runDown() {
         this.sprite.body.velocity.y = this.velocity;
-        //this.decreasePower(1);
     }
     runLeft() {
         this.sprite.body.velocity.x = -this.velocity;
-        //this.decreasePower(1);
     }
     runRight() {
         this.sprite.body.velocity.x = this.velocity;
-        //this.decreasePower(1);
     }
     shoot() {
         this.bulletSound.play();
@@ -126,9 +121,6 @@ class Player {
         else {
             this.power = 100;
             this.level.updatePowerBar();
-            //this.state = new PlayerStateDying(this);
-            //this.diedSound.play();
-            //this.level.playerStateChanged(this.state);
             return false;
         }
     }

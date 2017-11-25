@@ -362,6 +362,11 @@ abstract class BaseLevel extends Phaser.State {
         this.game.time.events.add(Phaser.Timer.SECOND / 32, this.scroll.bind(this));
     }
 
+
+
+
+
+
     goNextLevel() {
         this.levelMusic.stop();
         this.bulletSound.stop();
