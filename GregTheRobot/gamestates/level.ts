@@ -106,7 +106,7 @@ abstract class BaseLevel extends Phaser.State {
 
         //  Populate some tiles for our player to start on
 
-        let lines : string[] = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        let lines: string[] = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         for (let y = 0; y < lines.length; y++) {
             let line : string = lines[y];
             let lineArray : number[] = new Array(line.length);
