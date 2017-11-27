@@ -67,7 +67,7 @@ class BaseLevel extends Phaser.State {
         const HEIGHT_IN_TILES = 118;
         this.layer = this.map.create('level' + this.levelNumber, WIDTH_IN_TILES, HEIGHT_IN_TILES, 32, 32);
         //  Populate some tiles for our player to start on
-        let lines = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        let lines = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         for (let y = 0; y < lines.length; y++) {
             let line = lines[y];
             let lineArray = new Array(line.length);
