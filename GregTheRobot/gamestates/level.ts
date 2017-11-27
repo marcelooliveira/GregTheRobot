@@ -278,7 +278,8 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     firePlayerBullet() {
-        let playerBullet: PlayerBullet = new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
+        let playerBullet: PlayerBullet =
+            new PlayerBullet(this, this.layer, this.bulletSound, this.player, this.boss);
         playerBullet.setup();
         this.playerBullets.push(playerBullet);
         if (this.player.decreasePower(1)) {
