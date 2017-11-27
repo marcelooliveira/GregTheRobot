@@ -168,7 +168,7 @@ abstract class BaseLevel extends Phaser.State {
     }
 
     setupMapObjects() {
-        let map : string[] = this.readFile("/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
+        let map: string[] = this.readFile("/GregTheRobot/GregTheRobot/assets/maps/Map0" + this.levelNumber + ".txt").split('\n');
         this.setupExtras(map);
         this.setupEnemies(map);
     }
