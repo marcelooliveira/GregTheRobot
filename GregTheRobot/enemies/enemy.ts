@@ -49,15 +49,14 @@ abstract class BaseEnemy {
             if (this.id != other.id) {
                 this.game.physics.arcade.collide(this.sprite, other.sprite, function () {
 
-                }.bind(this));
+                }.bind(this));  
             }
         });
-
     }
 
     setup() {
         this.sprite = this.game.add.sprite(this.x, this.y, 'enemy' + this.enemyNumber);
-        this.sprite.animations.add('run', [0, 1, 2, 3, 2, 1], 4, true);
+        this.sprite.animations.add('run', [0, 1, 2, 3, 4, 5, 6, 7], 4, true);
         this.sprite.animations.play('run');
         this.game.physics.arcade.enable(this.sprite);
         this.sprite.body.collideWorldBounds = true;
@@ -86,7 +85,7 @@ class EnemyB extends BaseEnemy {
         super.update();
 
         if (this.sprite.inCamera) {
-            var direction: number;
+            let direction: number;
 
             if (this.sprite.body.position.x > this.player.sprite.body.position.x)
             {

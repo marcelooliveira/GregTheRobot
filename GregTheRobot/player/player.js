@@ -23,7 +23,7 @@ class Player {
     update() {
         this.game.physics.arcade.collide(this.sprite, this.layer);
         this.sprite.body.velocity.set(0);
-        var currentFrameindex = this.sprite.animations.currentFrame.index;
+        let currentFrameindex = this.sprite.animations.currentFrame.index;
         switch (currentFrameindex) {
             case 0:
                 this.sprite.rotation = -.1;
@@ -67,7 +67,6 @@ class Player {
     }
     recharged(charge) {
         this.rechargeSound.play();
-        //this.sprite.animations.play('hit');
         this.increasePower(charge);
     }
     resurrect() {
@@ -75,28 +74,27 @@ class Player {
         this.state = new PlayerStateRunning(this);
     }
     walk() {
-        if (!this.cursors.down.isDown
-            && !this.cursors.up.isDown
-            && !this.cursors.left.isDown
-            && !this.cursors.right.isDown) {
+        if (this.noCursorKeyDown()) {
             this.sprite.body.velocity.y = -this.walkingVelocity;
         }
     }
+    noCursorKeyDown() {
+        return !this.cursors.down.isDown
+            && !this.cursors.up.isDown
+            && !this.cursors.left.isDown
+            && !this.cursors.right.isDown;
+    }
     runUp() {
         this.sprite.body.velocity.y = -this.velocity;
-        //this.decreasePower(1);
     }
     runDown() {
         this.sprite.body.velocity.y = this.velocity;
-        //this.decreasePower(1);
     }
     runLeft() {
         this.sprite.body.velocity.x = -this.velocity;
-        //this.decreasePower(1);
     }
     runRight() {
         this.sprite.body.velocity.x = this.velocity;
-        //this.decreasePower(1);
     }
     shoot() {
         this.bulletSound.play();
@@ -126,9 +124,6 @@ class Player {
         else {
             this.power = 100;
             this.level.updatePowerBar();
-            //this.state = new PlayerStateDying(this);
-            //this.diedSound.play();
-            //this.level.playerStateChanged(this.state);
             return false;
         }
     }
